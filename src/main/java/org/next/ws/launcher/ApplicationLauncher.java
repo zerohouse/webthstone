@@ -1,4 +1,4 @@
-package org.next.ws;
+package org.next.ws.launcher;
 
 
 import io.vertx.core.Vertx;
