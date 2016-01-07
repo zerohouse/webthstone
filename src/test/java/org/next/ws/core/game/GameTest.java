@@ -20,9 +20,7 @@ public class GameTest {
         Deck deck = new Deck("[1,2,3,4,5]");
         Deck deck2 = new Deck("[1,2,3,4,5]");
         Game game = new Game(new Camp(new Player(new Healer("사제"), deck)), new Camp(new Player(new Hunter("냥꾼"), deck2)));
-        List<Card> p1Cards = game.getCampFirst().getPlayers().get(0).getDeck().getCards();
-        System.out.println(p1Cards);
-        assertEquals(p1Cards.size(), 5);
+
     }
 
 

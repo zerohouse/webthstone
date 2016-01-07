@@ -7,7 +7,7 @@ import org.next.ws.core.card.template.DefaultCardTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class cardFactory {
+public class CardFactory {
 
 
     private static final Map<Integer, CardTemplate> CARD_MAP;
@@ -15,10 +15,10 @@ public class cardFactory {
     static {
         CARD_MAP = new HashMap<>();
         CARD_MAP.put(1, DefaultCardTemplate.CARD);
-        CARD_MAP.put(2, DefaultCardTemplate.CARD);
-        CARD_MAP.put(3, DefaultCardTemplate.CARD);
-        CARD_MAP.put(4, DefaultCardTemplate.CARD);
-        CARD_MAP.put(5, DefaultCardTemplate.CARD);
+        CARD_MAP.put(2, DefaultCardTemplate.CARD2);
+        CARD_MAP.put(3, DefaultCardTemplate.CARD3);
+        CARD_MAP.put(4, DefaultCardTemplate.CARD4);
+        CARD_MAP.put(5, DefaultCardTemplate.CARD5);
     }
 
 

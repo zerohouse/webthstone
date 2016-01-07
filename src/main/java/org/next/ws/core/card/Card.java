@@ -7,8 +7,10 @@ import org.next.ws.core.card.template.CardTemplate;
 public class Card {
 
     private Integer cost;
+    private String name;
 
     public Card(CardTemplate cardTemplate) {
         this.cost = cardTemplate.getCost();
+        this.name = cardTemplate.getName();
     }
 }

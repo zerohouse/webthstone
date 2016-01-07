@@ -1,23 +1,28 @@
 package org.next.ws.core.game.player.deck;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Getter;
+import lombok.ToString;
 import org.next.ws.core.card.Card;
-import org.next.ws.core.card.factory.cardFactory;
+import org.next.ws.core.card.factory.CardFactory;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Random;
+import java.util.Stack;
 
-@Getter
+@ToString
 public class Deck {
-    private List<Card> cards;
+    private Stack<Card> cards;
 
     public Deck(String cardListString) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         List<Integer> cardIdList = objectMapper.readValue(cardListString, List.class);
         validate(cardIdList);
-        this.cards = cardIdList.stream().map(cardFactory::getNewCardById).collect(Collectors.toList());
+        cards = new Stack<>();
+        cardIdList.forEach(id -> {
+            cards.add(CardFactory.getNewCardById(id));
+        });
     }
 
 
@@ -25,5 +30,17 @@ public class Deck {
     }
 
     public void shuffle() {
+        long seed = System.nanoTime();
+        Collections.shuffle(cards, new Random(seed));
+    }
+
+    public int countCard() {
+        return cards.size();
+    }
+
+    public Card drawCard() {
+        if (cards.size() == 0)
+            return null;
+        return cards.pop();
     }
 }
