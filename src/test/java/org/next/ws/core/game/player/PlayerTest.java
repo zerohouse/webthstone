@@ -18,11 +18,6 @@ public class PlayerTest {
         player = new Player(new Healer("사제"), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]"));
     }
 
-    @Test
-    public void testReady() throws Exception {
-        System.out.println(player);
-    }
-
 
     @Test
     public void testSize() throws Exception {

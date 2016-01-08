@@ -1,11 +1,13 @@
 package org.next.ws.core.game.player.hero;
 
+import lombok.Getter;
 import lombok.ToString;
 import org.next.ws.core.hero.prop.ability.Ability;
 import org.next.ws.core.hero.prop.vital.Vital;
 import org.next.ws.core.hero.Hero;
 
 @ToString
+@Getter
 public class GameHero {
 
     private String name;
@@ -19,4 +21,9 @@ public class GameHero {
         this.vital = hero.getVital();
         this.mana = new Mana();
     }
+
+    public void manaAdd(int size) {
+        mana.add(size);
+    }
+
 }

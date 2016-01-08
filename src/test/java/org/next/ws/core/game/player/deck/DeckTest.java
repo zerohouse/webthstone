@@ -14,6 +14,23 @@ public class DeckTest {
         deck = new Deck("[1,2,3,4,5]");
     }
 
+
+    @Test(expected = CardSizeNotMatched.class)
+    public void validate() throws Exception {
+        deck.validate(6, 2);
+    }
+
+    @Test
+    public void validate2() throws Exception {
+        deck.validate(5, 2);
+    }
+
+    @Test(expected = SameCardLimitViolation.class)
+    public void validate3() throws Exception {
+        deck = new Deck("[1,2,3,3,3]");
+        deck.validate(5, 2);
+    }
+
     @Test
     public void testCount() throws Exception {
         assertEquals(deck.countCard(), 5);

@@ -1,9 +1,9 @@
 package org.next.ws.core.game.player.deck;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.ToString;
+import org.next.common.util.Util;
+import org.next.ws.cards.CardFactory;
 import org.next.ws.core.card.Card;
-import org.next.ws.core.card.factory.CardFactory;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -14,19 +14,21 @@ import java.util.Stack;
 @ToString
 public class Deck {
     private Stack<Card> cards;
-
+    private List<Integer> cardIdList;
     public Deck(String cardListString) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Integer> cardIdList = objectMapper.readValue(cardListString, List.class);
-        validate(cardIdList);
+        cardIdList = Util.OBJECT_MAPPER.readValue(cardListString, List.class);
         cards = new Stack<>();
         cardIdList.forEach(id -> {
-            cards.add(CardFactory.getNewCardById(id));
+            cards.add(CardFactory.getNewCardByTemplateId(id));
         });
     }
 
 
-    private void validate(List<Integer> cardIdList) {
+    public void validate(Integer size, Integer sameCardLimit) {
+        if (!size.equals(countCard()))
+            throw new CardSizeNotMatched();
+        if (cardIdList.stream().filter(id -> Collections.frequency(cardIdList, id) > sameCardLimit).findAny().isPresent())
+            throw new SameCardLimitViolation();
     }
 
     public void shuffle() {

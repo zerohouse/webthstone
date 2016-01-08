@@ -2,9 +2,11 @@ package org.next.ws.core.game.player;
 
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.next.ws.core.card.Card;
-import org.next.ws.core.game.field.Field;
+import org.next.ws.core.card.UnUsableCardException;
+import org.next.ws.core.game.camp.Camp;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.game.player.hand.Hand;
 import org.next.ws.core.game.player.secret.Secret;
@@ -17,33 +19,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@ToString
+@ToString(exclude = "camp")
 @Getter
+@Setter
 public class Player {
 
     private static final Logger logger = LoggerFactory.getLogger(Player.class);
+    private Camp camp;
 
     public Player(Hero hero, Deck deck) {
         this.gameHero = new GameHero(hero);
         this.secret = new ArrayList<>();
         this.deck = deck;
-        this.hand = new Hand();
-        this.field = new Field();
-        nullDeckCount = 0;
+        this.hand = new Hand(camp);
+        this.nullDeckCount = 0;
+        this.turn = false;
     }
 
-    private final Deck deck;
-    private final Hand hand;
-    private final GameHero gameHero;
+    final Deck deck;
+    final Hand hand;
+    final GameHero gameHero;
 
-    private final Field field;
+
     private final List<Secret> secret;
     private int nullDeckCount;
+    private boolean turn;
 
-    public void ready(boolean first) {
-
-
+    public void useCard(Integer index){
+        try {
+            Card card = this.hand.pickCard(index);
+            card.use(camp);
+        } catch (UnUsableCardException e) {
+            e.printStackTrace();
+        }
     }
+
 
     public void drawCard(Integer size) {
         for (int i = 0; i < size; i++) {
@@ -62,7 +72,10 @@ public class Player {
 
     public void nullCardEvent() {
         nullDeckCount++;
-        logger.debug("player deck empty {}", nullDeckCount);
+        logger.debug("player deck empty - count:{}", nullDeckCount);
     }
 
+    public int countCard() {
+        return deck.countCard() + hand.countCard();
+    }
 }
