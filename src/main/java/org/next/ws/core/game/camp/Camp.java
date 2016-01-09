@@ -3,30 +3,39 @@ package org.next.ws.core.game.camp;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.next.ws.core.action.Action;
 import org.next.ws.core.fighter.Fighter;
+import org.next.ws.core.game.Game;
 import org.next.ws.core.game.field.Field;
+import org.next.ws.core.game.player.Player;
+import org.next.ws.gamelauncher.broadcaster.BroadCaster;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 @Getter
 @Setter
 @ToString(exclude = "enemy")
 public abstract class Camp {
 
-    protected List<Consumer<Camp>> startTurnEffects;
-    protected List<Consumer<Camp>> endTurnEffects;
+    protected List<Action> startTurnEffects;
+    protected List<Action> endTurnEffects;
     protected Camp enemy;
     protected boolean turn;
     protected final Field field;
-
+    protected BroadCaster broadCaster;
 
     public abstract void ready(boolean first);
 
     protected abstract void turnStartAction();
 
     protected abstract void turnEndAction();
+
+    public abstract Player getPlayingPlayer();
+
+    public abstract List<Fighter> getAllFighters();
+
+    public abstract List<Fighter> getFieldFighters();
 
     public abstract String getName();
 
@@ -45,21 +54,21 @@ public abstract class Camp {
     }
 
     public void startTurn() {
-
-        startTurnEffects.forEach(action -> {
-            action.accept(this);
-        });
+        startTurnEffects.forEach(Action::act);
         this.turnStartAction();
         this.turn = true;
     }
 
     public void endTurn() {
-        endTurnEffects.forEach(action -> {
-            action.accept(this);
-        });
+        endTurnEffects.forEach(Action::act);
         this.turnEndAction();
         this.turn = false;
     }
 
+
+    public void broadCast(Object object) {
+        if(broadCaster!=null)
+            broadCaster.broadCast(object);
+    }
 
 }

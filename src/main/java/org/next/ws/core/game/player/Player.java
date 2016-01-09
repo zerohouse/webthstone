@@ -6,11 +6,12 @@ import lombok.Setter;
 import lombok.ToString;
 import org.next.ws.core.card.Card;
 import org.next.ws.core.card.UnUsableCardException;
+import org.next.ws.core.card.property.Cost;
 import org.next.ws.core.game.camp.Camp;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.game.player.hand.Hand;
-import org.next.ws.core.game.player.secret.Secret;
 import org.next.ws.core.game.player.hero.GameHero;
+import org.next.ws.core.game.player.secret.Secret;
 import org.next.ws.core.hero.Hero;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,5 +78,9 @@ public class Player {
 
     public int countCard() {
         return deck.countCard() + hand.countCard();
+    }
+
+    public boolean hasEnoughMana(Cost cost) {
+        return gameHero.getMana().isEnough(cost.getCost());
     }
 }

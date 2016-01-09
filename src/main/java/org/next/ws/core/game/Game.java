@@ -16,9 +16,12 @@ public class Game {
 
     private Random random;
 
-    public Game(Camp one, Camp another) {
+    public Game() {
         this.phase = 0;
         random = new Random();
+    }
+
+    public void setCamp(Camp one, Camp another) {
         one.setEnemy(another);
         another.setEnemy(one);
 
@@ -60,5 +63,15 @@ public class Game {
         }
         campSecond.endTurn();
         phaseStart();
+    }
+
+    public void broadCast(Object object){
+        campFirst.broadCast(object);
+        campSecond.broadCast(object);
+    }
+
+    public void end() {
+
+
     }
 }

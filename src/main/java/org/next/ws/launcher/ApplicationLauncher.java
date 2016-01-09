@@ -12,19 +12,17 @@ import javax.annotation.PostConstruct;
 public class ApplicationLauncher {
 
     @Autowired
-    private StaticServer staticServer;
+    private WebSocketServer websocketServer;
 
 
     public static void main(String[] args) {
 
-        // This is basically the same example as the web-examples staticsite example but it's booted using
-        // SpringBoot, not Vert.x
         SpringApplication.run(ApplicationLauncher.class, args);
     }
 
     @PostConstruct
     public void deployVerticle() {
-        Vertx.vertx().deployVerticle(staticServer);
+        Vertx.vertx().deployVerticle(websocketServer);
     }
 
 }

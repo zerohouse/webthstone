@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.hero.healer.Healer;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SinglePlayerCampTest {
 
@@ -13,7 +13,7 @@ public class SinglePlayerCampTest {
 
     @Before
     public void setUp() throws Exception {
-        singlePlayerCamp = new SinglePlayerCamp(new Player(new Healer("사제"), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]")));
+        singlePlayerCamp = new SinglePlayerCamp(new Player(new Healer("사제", null), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]")));
     }
 
     @Test

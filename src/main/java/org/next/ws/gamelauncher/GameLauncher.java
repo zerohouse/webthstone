@@ -5,20 +5,13 @@ import org.next.ws.gamelauncher.broadcaster.BroadCaster;
 
 public class GameLauncher {
     private Game game;
-    private BroadCaster broadCaster;
 
-    public GameLauncher(Game game, BroadCaster broadCaster) {
+    public GameLauncher(Game game) {
         this.game = game;
-        this.broadCaster = broadCaster;
     }
 
     public void start() {
         game.start();
-        broadCaster.broadCast(game);
-
     }
 
-    public void waitEvent() {
-
-    }
 }

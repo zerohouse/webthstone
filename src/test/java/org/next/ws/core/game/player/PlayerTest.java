@@ -4,10 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.hero.healer.Healer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PlayerTest {
 
@@ -15,7 +13,7 @@ public class PlayerTest {
 
     @Before
     public void setUp() throws Exception {
-        player = new Player(new Healer("사제"), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]"));
+        player = new Player(new Healer("사제", null), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]"));
     }
 
 

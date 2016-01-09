@@ -8,7 +8,6 @@ import org.next.ws.core.game.player.SinglePlayerCamp;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.hero.healer.Healer;
 import org.next.ws.core.hero.hunter.Hunter;
-import org.next.ws.gamelauncher.broadcaster.ConsoleBroadCaster;
 
 public class GameLauncherTest {
 
@@ -18,8 +17,9 @@ public class GameLauncherTest {
     public void setUp() throws Exception {
         Deck deck = new Deck("[1,2,3,4,5]");
         Deck deck2 = new Deck("[1,2,3,4,5]");
-        Game game = new Game(new SinglePlayerCamp(new Player(new Healer("사제"), deck)), new SinglePlayerCamp(new Player(new Hunter("냥꾼"), deck2)));
-        gameLauncher = new GameLauncher(game, new ConsoleBroadCaster());
+        Game game = new Game();
+        game.setCamp(new SinglePlayerCamp(new Player(new Healer("사제", game), deck)), new SinglePlayerCamp(new Player(new Hunter("냥꾼", game), deck2)));
+
     }
 
     @Test

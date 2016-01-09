@@ -11,8 +11,6 @@ import org.next.ws.core.hero.hunter.Hunter;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
-
 public class CardTest {
 
     private Game game;
@@ -21,13 +19,12 @@ public class CardTest {
     public void setup() throws IOException {
         Deck deck = new Deck("[1,2,3,4,5]");
         Deck deck2 = new Deck("[1,2,3,4,5]");
-        game = new Game(new SinglePlayerCamp(new Player(new Healer("사제"), deck)), new SinglePlayerCamp(new Player(new Hunter("냥꾼"), deck2)));
+        game = new Game();
+        game.setCamp(new SinglePlayerCamp(new Player(new Healer("사제", game), deck)), new SinglePlayerCamp(new Player(new Hunter("냥꾼", game), deck2)));
     }
 
     @Test
     public void testUsable() throws Exception {
-//        Card card = new Card(DefaultCardTemplate.CARD);
-//        card.usable(game.getCampFirst());
     }
 
 }

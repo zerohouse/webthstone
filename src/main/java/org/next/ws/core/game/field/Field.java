@@ -1,5 +1,6 @@
 package org.next.ws.core.game.field;
 
+import lombok.Getter;
 import lombok.ToString;
 import org.next.ws.core.StaticValues;
 import org.next.ws.core.fighter.Fighter;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ToString
+@Getter
 public class Field {
 
     private int fieldMax;

@@ -18,4 +18,8 @@ public class Mana {
         if (mana < MIN_MANA)
             mana = MIN_MANA;
     }
+
+    public boolean isEnough(int cost) {
+        return mana >= cost;
+    }
 }

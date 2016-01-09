@@ -3,7 +3,11 @@ package org.next.ws.core.game.player;
 import lombok.ToString;
 import org.next.ws.cards.SpellCard;
 import org.next.ws.core.card.Card;
+import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.camp.Camp;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @ToString
 public class SinglePlayerCamp extends Camp {
@@ -40,6 +44,24 @@ public class SinglePlayerCamp extends Camp {
     @Override
     public String getName() {
         return player.gameHero.getName();
+    }
+
+    @Override
+    public Player getPlayingPlayer() {
+        return player;
+    }
+
+    @Override
+    public List<Fighter> getAllFighters() {
+        List<Fighter> fighters = new ArrayList<>();
+        fighters.addAll(getFieldFighters());
+        fighters.add(player.getGameHero());
+        return fighters;
+    }
+
+    @Override
+    public List<Fighter> getFieldFighters() {
+        return field.getFighters();
     }
 
 }
