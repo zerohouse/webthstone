@@ -12,7 +12,6 @@ public class WebSocketServer extends AbstractVerticle {
 
     @Override
     public void start() throws Exception {
-        vertx.createHttpServer().websocketHandler(new GameHandler()).requestHandler(request -> {
-        }).listen(9000);
+        vertx.createHttpServer().websocketHandler(new GameHandler()).listen(9000);
     }
 }

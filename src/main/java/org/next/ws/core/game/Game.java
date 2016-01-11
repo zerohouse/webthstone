@@ -3,6 +3,8 @@ package org.next.ws.core.game;
 import lombok.Getter;
 import lombok.ToString;
 import org.next.ws.core.game.camp.Camp;
+import org.next.ws.core.event.standard.EventResult;
+import org.next.ws.core.event.standard.EventType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +25,9 @@ public class Game {
 
     public void setCamp(Camp one, Camp another) {
         one.setEnemy(another);
+        one.setGame(this);
         another.setEnemy(one);
+        another.setGame(this);
 
         boolean first = random.nextBoolean();
         if (first) {
@@ -65,9 +69,9 @@ public class Game {
         phaseStart();
     }
 
-    public void broadCast(Object object){
-        campFirst.broadCast(object);
-        campSecond.broadCast(object);
+    public void broadCast(EventType type, EventResult result){
+        campFirst.broadCast(type, result);
+        campSecond.broadCast(type, result);
     }
 
     public void end() {

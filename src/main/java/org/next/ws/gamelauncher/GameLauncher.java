@@ -1,7 +1,6 @@
 package org.next.ws.gamelauncher;
 
 import org.next.ws.core.game.Game;
-import org.next.ws.gamelauncher.broadcaster.BroadCaster;
 
 public class GameLauncher {
     private Game game;

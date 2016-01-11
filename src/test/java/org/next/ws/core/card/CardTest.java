@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.next.ws.core.game.Game;
 import org.next.ws.core.game.player.Player;
-import org.next.ws.core.game.player.SinglePlayerCamp;
+import org.next.ws.core.game.camp.SinglePlayerCamp;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.hero.healer.Healer;
 import org.next.ws.core.hero.hunter.Hunter;
