@@ -9,5 +9,6 @@ public class EventRunner {
     }
 
     public void run(Buffer event) {
+        System.out.println(event.toString());
     }
 }

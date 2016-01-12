@@ -2,8 +2,8 @@ package org.next.ws.core.game;
 
 import lombok.Getter;
 import lombok.ToString;
+import org.next.ws.core.event.standard.Communicate;
 import org.next.ws.core.game.camp.Camp;
-import org.next.ws.core.event.standard.EventResult;
 import org.next.ws.core.event.standard.EventType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,9 +69,9 @@ public class Game {
         phaseStart();
     }
 
-    public void broadCast(EventType type, EventResult result){
-        campFirst.broadCast(type, result);
-        campSecond.broadCast(type, result);
+    public void broadCast(Communicate communicate){
+        campFirst.broadCast(communicate);
+        campSecond.broadCast(communicate);
     }
 
     public void end() {

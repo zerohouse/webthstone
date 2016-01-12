@@ -5,8 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.next.ws.core.action.Action;
 import org.next.ws.core.event.EventRunner;
+import org.next.ws.core.event.standard.Communicate;
 import org.next.ws.core.fighter.Fighter;
-import org.next.ws.core.event.standard.EventResult;
 import org.next.ws.core.event.standard.EventType;
 import org.next.ws.core.game.Game;
 import org.next.ws.core.game.field.Field;
@@ -74,8 +74,8 @@ public abstract class Camp {
         this.turn = false;
     }
 
-    public void broadCast(EventType type, EventResult result) {
-        broadCaster.broadCast(type, result);
+    public void broadCast(Communicate communicate) {
+        broadCaster.broadCast(communicate);
     }
 
 }

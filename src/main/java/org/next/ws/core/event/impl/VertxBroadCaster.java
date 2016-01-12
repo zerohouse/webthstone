@@ -1,7 +1,7 @@
 package org.next.ws.core.event.impl;
 
 import io.vertx.core.http.ServerWebSocket;
-import org.next.ws.core.event.standard.EventResult;
+import org.next.ws.core.event.standard.Communicate;
 import org.next.ws.core.event.standard.EventType;
 import org.next.ws.core.event.BroadCaster;
 
@@ -15,7 +15,7 @@ public class VertxBroadCaster implements BroadCaster {
     }
 
     @Override
-    public void broadCast(EventType type, EventResult eventResult) {
+    public void broadCast(Communicate communicate) {
 
     }
 

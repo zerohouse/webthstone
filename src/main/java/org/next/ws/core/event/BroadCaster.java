@@ -1,8 +1,8 @@
 package org.next.ws.core.event;
 
-import org.next.ws.core.event.standard.EventResult;
-import org.next.ws.core.event.standard.EventType;
+import org.next.ws.core.event.standard.Communicate;
 
 public interface BroadCaster {
-    void broadCast(EventType type, EventResult eventResult);
+
+    void broadCast(Communicate communicate);
 }
