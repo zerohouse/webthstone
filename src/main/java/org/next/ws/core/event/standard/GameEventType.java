@@ -1,4 +1,4 @@
 package org.next.ws.core.event.standard;
 
-public class EventType {
+public class GameEventType {
 }

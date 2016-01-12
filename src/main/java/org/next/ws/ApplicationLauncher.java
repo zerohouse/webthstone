@@ -1,7 +1,8 @@
-package org.next.ws.launcher;
+package org.next.ws;
 
 
 import io.vertx.core.Vertx;
+import org.next.ws.server.WebSocketServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,7 +17,6 @@ public class ApplicationLauncher {
 
 
     public static void main(String[] args) {
-
         SpringApplication.run(ApplicationLauncher.class, args);
     }
 

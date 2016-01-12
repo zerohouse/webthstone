@@ -7,7 +7,7 @@ import org.next.ws.core.action.Action;
 import org.next.ws.core.event.EventRunner;
 import org.next.ws.core.event.standard.Communicate;
 import org.next.ws.core.fighter.Fighter;
-import org.next.ws.core.event.standard.EventType;
+import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.game.Game;
 import org.next.ws.core.game.field.Field;
 import org.next.ws.core.game.player.Player;

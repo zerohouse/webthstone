@@ -2,7 +2,7 @@ package org.next.ws.core.event.impl;
 
 import io.vertx.core.http.ServerWebSocket;
 import org.next.ws.core.event.standard.Communicate;
-import org.next.ws.core.event.standard.EventType;
+import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.event.BroadCaster;
 
 

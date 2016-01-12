@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.ToString;
 import org.next.ws.core.event.standard.Communicate;
 import org.next.ws.core.game.camp.Camp;
-import org.next.ws.core.event.standard.EventType;
+import org.next.ws.core.event.standard.GameEventType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

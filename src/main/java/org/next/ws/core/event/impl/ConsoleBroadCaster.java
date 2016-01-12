@@ -2,7 +2,7 @@ package org.next.ws.core.event.impl;
 
 import org.next.ws.core.event.BroadCaster;
 import org.next.ws.core.event.standard.Communicate;
-import org.next.ws.core.event.standard.EventType;
+import org.next.ws.core.event.standard.GameEventType;
 
 public class ConsoleBroadCaster implements BroadCaster {
     @Override

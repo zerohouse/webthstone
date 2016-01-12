@@ -4,6 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class Communicate {
-    private EventType eventType;
+    private GameEventType gameEventType;
     private Object body;
 }
