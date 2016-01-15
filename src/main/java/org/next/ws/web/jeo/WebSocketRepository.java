@@ -1,4 +1,4 @@
-package org.next.ws.server.websocket;
+package org.next.ws.web.jeo;
 
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package org.next.ws.server.room;
+package org.next.ws.web.room;
 
 import lombok.Getter;
 import lombok.Setter;

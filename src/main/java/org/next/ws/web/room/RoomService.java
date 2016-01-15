@@ -1,4 +1,4 @@
-package org.next.ws.server.room;
+package org.next.ws.web.room;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package org.next.ws.server.websocket.jeo;
+package org.next.ws.web.jeo;
 
 import org.springframework.stereotype.Component;
 

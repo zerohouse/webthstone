@@ -1,4 +1,4 @@
-package org.next.ws.server;
+package org.next.ws.web;
 
 
 import io.vertx.core.Vertx;

@@ -1,6 +1,5 @@
-package org.next.ws.server.websocket.jeo;
+package org.next.ws.web.jeo;
 
-import io.vertx.core.buffer.Buffer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
