@@ -1,10 +1,11 @@
-package org.next.ws.web.matching;
+package org.next.ws.web.game;
 
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
 import org.next.ws.core.game.Game;
 import org.next.ws.core.game.camp.SinglePlayerCamp;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.hero.healer.Healer;
+import org.next.ws.web.matching.SocketPlayer;
 
 import java.io.IOException;
 

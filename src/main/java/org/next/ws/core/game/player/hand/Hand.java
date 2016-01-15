@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.ToString;
 import org.next.ws.core.StaticValues;
 import org.next.ws.core.card.Card;
+import org.next.ws.core.card.CardDto;
 import org.next.ws.core.card.UnUsableCardException;
 import org.next.ws.core.game.camp.Camp;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ToString(exclude = {"camp"})
 @Getter
@@ -51,5 +53,9 @@ public class Hand {
         }
         cards.remove(card);
         return card;
+    }
+
+    public List<CardDto> getCardDtoList() {
+        return cards.stream().map(CardDto::new).collect(Collectors.toList());
     }
 }

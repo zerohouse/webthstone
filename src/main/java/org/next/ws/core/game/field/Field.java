@@ -4,9 +4,11 @@ import lombok.Getter;
 import lombok.ToString;
 import org.next.ws.core.StaticValues;
 import org.next.ws.core.fighter.Fighter;
+import org.next.ws.core.fighter.FighterDto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ToString
 @Getter
@@ -26,5 +28,9 @@ public class Field {
 
     public void addFighters(List<Fighter> fighters) {
         this.fighters.addAll(fighters);
+    }
+
+    public List<FighterDto> getFighterDtoList() {
+        return fighters.stream().map(FighterDto::new).collect(Collectors.toList());
     }
 }

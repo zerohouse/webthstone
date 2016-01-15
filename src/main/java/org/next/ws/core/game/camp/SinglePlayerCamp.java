@@ -5,7 +5,10 @@ import org.next.ws.cards.SpellCard;
 import org.next.ws.core.card.Card;
 import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.fighter.Fighter;
+import org.next.ws.core.game.GameStateDto;
+import org.next.ws.core.game.player.EnemyPlayerDto;
 import org.next.ws.core.game.player.Player;
+import org.next.ws.core.game.player.PlayerDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +57,12 @@ public class SinglePlayerCamp extends Camp {
     }
 
     @Override
+    public void gameStateUpdate() {
+        player.broadCastEvent(GameEventType.PLAYER_UPDATE, new PlayerDto(player));
+        player.broadCastEvent(GameEventType.ENEMY_UPDATE, new EnemyPlayerDto(enemy.getPlayingPlayer()));
+    }
+
+    @Override
     public Player getPlayingPlayer() {
         return player;
     }
@@ -68,7 +77,7 @@ public class SinglePlayerCamp extends Camp {
 
     @Override
     public List<Fighter> getFieldFighters() {
-        return field.getFighters();
+        return player.getField().getFighters();
     }
 
 }

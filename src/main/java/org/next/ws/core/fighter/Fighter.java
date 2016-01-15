@@ -1,10 +1,12 @@
 package org.next.ws.core.fighter;
 
+import lombok.Getter;
 import lombok.Setter;
 import org.next.ws.core.action.Action;
 import org.next.ws.core.fighter.property.*;
 
 @Setter
+@Getter
 public abstract class Fighter {
 
     protected final AttackPower attackPower;
@@ -12,6 +14,7 @@ public abstract class Fighter {
     protected MagicPower magicPower;
     protected Species species;
     protected FighterState fighterState;
+    protected String name;
     protected Action deathAction;
     protected Action birthAction;
     protected Action turnStartAction;

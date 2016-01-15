@@ -8,7 +8,9 @@ import org.next.ws.core.card.Card;
 import org.next.ws.core.card.UnUsableCardException;
 import org.next.ws.core.card.property.Cost;
 import org.next.ws.core.event.standard.GameEventType;
+import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.camp.Camp;
+import org.next.ws.core.game.field.Field;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.game.player.hand.Hand;
 import org.next.ws.core.game.player.hero.GameHero;
@@ -28,12 +30,14 @@ public abstract class Player {
 
     private static final Logger logger = LoggerFactory.getLogger(Player.class);
     private Camp camp;
+    protected Field field;
 
     public Player(Hero hero, Deck deck) {
         this.gameHero = new GameHero(hero);
         this.secret = new ArrayList<>();
         this.deck = deck;
         this.hand = new Hand(camp);
+        this.field = new Field();
         this.nullDeckCount = 0;
         this.turn = false;
     }
@@ -86,4 +90,13 @@ public abstract class Player {
     }
 
     public abstract void broadCastEvent(GameEventType type, Object result);
+
+    public boolean addAble(List<Fighter> fighters) {
+        return field.addAble(fighters);
+    }
+
+    public void addFighters(List<Fighter> fighters) {
+        field.addFighters(fighters);
+    }
+
 }

@@ -1,8 +1,11 @@
 package org.next.ws.web.matching;
 
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
+import org.next.ws.web.game.GameService;
+import org.next.ws.web.game.Match;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +16,11 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 public class MatchingService {
 
     private static final Logger logger = LoggerFactory.getLogger(MatchingService.class);
+
     private final Queue<SockJSSocket> waitingQue;
+
+    @Autowired
+    GameService gameService;
 
     public MatchingService() {
         this.waitingQue = new ConcurrentLinkedDeque<>();
@@ -33,14 +40,11 @@ public class MatchingService {
             SockJSSocket sockJSSocket2 = connectedSocket(waitingQue);
             if (sockJSSocket == null || sockJSSocket2 == null)
                 return;
-            makeMatch(sockJSSocket, sockJSSocket2);
+            gameService.makeMatch(sockJSSocket, sockJSSocket2);
         }
     }
 
-    private void makeMatch(SockJSSocket sockJSSocket, SockJSSocket sockJSSocket2) {
-        Match match = new Match(sockJSSocket, sockJSSocket2);
-        match.start();
-    }
+
 
     private SockJSSocket connectedSocket(Queue<SockJSSocket> waitingQue) {
         /*

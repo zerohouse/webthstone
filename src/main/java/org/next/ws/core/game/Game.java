@@ -78,7 +78,9 @@ public class Game {
 
     private void gameStateUpdate() {
         campFirst.broadCast(GameEventType.UPDATE, new GameStateDto(this));
+        campFirst.gameStateUpdate();
         campSecond.broadCast(GameEventType.UPDATE, new GameStateDto(this));
+        campSecond.gameStateUpdate();
     }
 
     public void end() {

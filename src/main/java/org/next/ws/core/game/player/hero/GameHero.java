@@ -11,7 +11,6 @@ import org.next.ws.core.hero.prop.ability.Ability;
 @Getter
 public class GameHero extends Fighter {
 
-    private String name;
     private Ability ability;
     private Vital vital;
     private Mana mana;
@@ -28,4 +27,7 @@ public class GameHero extends Fighter {
         mana.add(size);
     }
 
+    public HeroDto getHeroDto() {
+        return new HeroDto(this);
+    }
 }

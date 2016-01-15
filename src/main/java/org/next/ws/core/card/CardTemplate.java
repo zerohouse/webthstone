@@ -12,4 +12,6 @@ public class CardTemplate {
 
     private Integer cost;
     private String name;
+    private String desc;
+    private String img;
 }

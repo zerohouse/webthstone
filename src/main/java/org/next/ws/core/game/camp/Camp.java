@@ -7,7 +7,6 @@ import org.next.ws.core.action.Action;
 import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.Game;
-import org.next.ws.core.game.field.Field;
 import org.next.ws.core.game.player.Player;
 
 import java.util.ArrayList;
@@ -22,7 +21,6 @@ public abstract class Camp {
     protected List<Action> endTurnEffects;
     protected Camp enemy;
     protected boolean turn;
-    protected final Field field;
     protected Game game;
 
 
@@ -40,16 +38,7 @@ public abstract class Camp {
 
     public abstract String getName();
 
-    public boolean addAble(List<Fighter> fighters) {
-        return field.addAble(fighters);
-    }
-
-    public void addFighters(List<Fighter> fighters) {
-        field.addFighters(fighters);
-    }
-
     public Camp() {
-        field = new Field();
         startTurnEffects = new ArrayList<>();
         endTurnEffects = new ArrayList<>();
     }
@@ -58,6 +47,7 @@ public abstract class Camp {
         startTurnEffects.forEach(Action::act);
         this.turnStartAction();
         this.turn = true;
+
     }
 
     public void endTurn() {
@@ -67,4 +57,7 @@ public abstract class Camp {
     }
 
     public abstract void broadCast(GameEventType gameEvent, Object result);
+
+    public abstract void gameStateUpdate();
+
 }

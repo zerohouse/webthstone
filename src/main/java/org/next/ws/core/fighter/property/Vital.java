@@ -1,7 +1,9 @@
 package org.next.ws.core.fighter.property;
 
+import lombok.Getter;
 import org.next.ws.core.StaticValues;
 
+@Getter
 public class Vital {
 
     private int minVital;
@@ -27,4 +29,5 @@ public class Vital {
     public static Vital getDefaultHeroVital() {
         return new Vital(30);
     }
+
 }
