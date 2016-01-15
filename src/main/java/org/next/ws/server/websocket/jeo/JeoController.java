@@ -1,5 +1,4 @@
-package org.next.ws.server;
-
+package org.next.ws.server.websocket.jeo;
 
 import org.springframework.stereotype.Component;
 
@@ -11,5 +10,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Component
-public @interface SocketHandler {
+public @interface JeoController {
 }

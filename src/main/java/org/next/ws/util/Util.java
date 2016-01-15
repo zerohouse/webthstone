@@ -1,4 +1,4 @@
-package org.next.common.util;
+package org.next.ws.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
