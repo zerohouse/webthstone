@@ -1,9 +1,9 @@
 package org.next.ws.core.game.player.deck;
 
 import lombok.ToString;
-import org.next.ws.util.Util;
 import org.next.ws.cards.CardFactory;
 import org.next.ws.core.card.Card;
+import org.next.ws.util.Util;
 
 import java.io.IOException;
 import java.util.Collections;

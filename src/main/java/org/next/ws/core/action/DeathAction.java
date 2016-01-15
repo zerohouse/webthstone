@@ -1,7 +1,6 @@
 package org.next.ws.core.action;
 
 import org.next.ws.core.fighter.Fighter;
-import org.next.ws.core.type.RangeAble;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,12 @@
 package org.next.ws.web.jeo;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import io.vertx.core.buffer.Buffer;
+import io.vertx.ext.web.handler.sockjs.SockJSSocket;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.next.ws.util.Util;
 
 import java.util.Map;
 
@@ -23,5 +27,14 @@ public class Jeo {
     public Jeo(String type, Object result) {
         this.type = type;
         this.result = result;
+    }
+
+    public static void event(SockJSSocket sockJSSocket, String event, Object result) {
+        Jeo jeo = new Jeo(event, result);
+        try {
+            sockJSSocket.write(Buffer.buffer(Util.OBJECT_MAPPER.writeValueAsString(jeo)));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -13,7 +13,7 @@ public class PlayerTest {
 
     @Before
     public void setUp() throws Exception {
-        player = new Player(new Healer("사제", null), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]"));
+        player = new ConsoleTestingPlayer(new Healer("사제", null), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]"));
     }
 
 

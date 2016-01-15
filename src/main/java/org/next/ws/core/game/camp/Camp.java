@@ -4,14 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.next.ws.core.action.Action;
-import org.next.ws.core.event.EventRunner;
-import org.next.ws.core.event.standard.Communicate;
-import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.event.standard.GameEventType;
+import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.Game;
 import org.next.ws.core.game.field.Field;
 import org.next.ws.core.game.player.Player;
-import org.next.ws.core.event.BroadCaster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +23,8 @@ public abstract class Camp {
     protected Camp enemy;
     protected boolean turn;
     protected final Field field;
-    protected BroadCaster broadCaster;
-    protected EventRunner eventRunner;
     protected Game game;
 
-    public abstract void setEventRunner(EventRunner eventRunner);
-
-    public abstract void setBroadCaster(BroadCaster broadCaster);
 
     public abstract void ready(boolean first);
 
@@ -74,8 +66,5 @@ public abstract class Camp {
         this.turn = false;
     }
 
-    public void broadCast(Communicate communicate) {
-        broadCaster.broadCast(communicate);
-    }
-
+    public abstract void broadCast(GameEventType gameEvent, Object result);
 }

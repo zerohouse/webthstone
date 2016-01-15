@@ -1,12 +1,10 @@
 package org.next.ws.core.game.camp;
 
-import lombok.Getter;
 import lombok.ToString;
 import org.next.ws.cards.SpellCard;
 import org.next.ws.core.card.Card;
-import org.next.ws.core.event.EventRunner;
+import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.fighter.Fighter;
-import org.next.ws.core.event.BroadCaster;
 import org.next.ws.core.game.player.Player;
 
 import java.util.ArrayList;
@@ -22,19 +20,9 @@ public class SinglePlayerCamp extends Camp {
         player.setCamp(this);
     }
 
-
-    @Override
-    public void setEventRunner(EventRunner eventRunner) {
-        this.eventRunner = eventRunner;
-    }
-
-    @Override
-    public void setBroadCaster(BroadCaster broadCaster) {
-        this.broadCaster = broadCaster;
-    }
-
     @Override
     public void ready(boolean first) {
+        player.broadCastEvent(GameEventType.START, first);
         player.getDeck().shuffle();
         if (first) {
             player.drawCard(3);
@@ -58,6 +46,11 @@ public class SinglePlayerCamp extends Camp {
     @Override
     public String getName() {
         return player.getGameHero().getName();
+    }
+
+    @Override
+    public void broadCast(GameEventType gameEvent, Object result) {
+        player.broadCastEvent(gameEvent, result);
     }
 
     @Override

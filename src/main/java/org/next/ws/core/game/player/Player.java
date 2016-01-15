@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.next.ws.core.card.Card;
 import org.next.ws.core.card.UnUsableCardException;
 import org.next.ws.core.card.property.Cost;
+import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.game.camp.Camp;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.game.player.hand.Hand;
@@ -23,7 +24,7 @@ import java.util.List;
 @ToString(exclude = "camp")
 @Getter
 @Setter
-public class Player {
+public abstract class Player {
 
     private static final Logger logger = LoggerFactory.getLogger(Player.class);
     private Camp camp;
@@ -83,4 +84,6 @@ public class Player {
     public boolean hasEnoughMana(Cost cost) {
         return gameHero.getMana().isEnough(cost.getCost());
     }
+
+    public abstract void broadCastEvent(GameEventType type, Object result);
 }

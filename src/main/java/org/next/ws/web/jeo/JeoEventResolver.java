@@ -1,7 +1,5 @@
 package org.next.ws.web.jeo;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import io.vertx.core.buffer.Buffer;
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
 import org.next.ws.util.Util;
 import org.slf4j.Logger;
@@ -81,9 +79,8 @@ public class JeoEventResolver {
                 if (result == null)
                     return;
                 String event = "".equals(makeEvent) ? type : makeEvent;
-                Jeo jeo = new Jeo(event, result);
-                sockJSSocket.write(Buffer.buffer(Util.OBJECT_MAPPER.writeValueAsString(jeo)));
-            } catch (IllegalAccessException | InvocationTargetException | JsonProcessingException e) {
+                Jeo.event(sockJSSocket, event, result);
+            } catch (IllegalAccessException | InvocationTargetException e) {
                 logger.warn("error occurred when execute method");
                 e.printStackTrace();
             }
@@ -98,9 +95,15 @@ public class JeoEventResolver {
             return parameterList.toArray();
         }
 
+
+        /*
+        * 파라미터 핸들링
+        * */
         private Object getParameter(Parameter parameter, Map<String, Object> params, SockJSSocket sockJSSocket) {
             if (params != null && parameter.getType().isAssignableFrom(params.getClass()))
                 return params;
+            if (parameter.getType().isAssignableFrom(SockJSSocket.class))
+                return sockJSSocket;
             return null;
         }
     }
