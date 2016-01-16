@@ -2,7 +2,6 @@ package org.next.ws.core.game.player;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.next.ws.core.card.CardDto;
 import org.next.ws.core.fighter.FighterDto;
 import org.next.ws.core.game.player.hero.HeroDto;
 

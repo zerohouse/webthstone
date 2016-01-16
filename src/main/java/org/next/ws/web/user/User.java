@@ -7,5 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class User {
-    private SockJSSocket jsSocket;
+    private SockJSSocket sockJSSocket;
+
+    public User(SockJSSocket sockJSSocket) {
+        this.sockJSSocket = sockJSSocket;
+    }
 }

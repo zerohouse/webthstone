@@ -2,6 +2,8 @@ package org.next.ws.web.jeo;
 
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
 import org.next.ws.util.Util;
+import org.next.ws.web.user.User;
+import org.next.ws.web.user.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,14 +98,18 @@ public class JeoEventResolver {
         }
 
 
+
+        @Autowired
+        UserRepository userRepository;
+
         /*
         * 파라미터 핸들링
         * */
         private Object getParameter(Parameter parameter, Map<String, Object> params, SockJSSocket sockJSSocket) {
             if (params != null && parameter.getType().isAssignableFrom(params.getClass()))
                 return params;
-            if (parameter.getType().isAssignableFrom(SockJSSocket.class))
-                return sockJSSocket;
+            if (parameter.getType().isAssignableFrom(User.class))
+                return userRepository.getUser(sockJSSocket);
             return null;
         }
     }

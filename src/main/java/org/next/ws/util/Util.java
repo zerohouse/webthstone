@@ -1,7 +1,6 @@
 package org.next.ws.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.next.ws.core.StaticValues;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -2,7 +2,7 @@ package org.next.ws.web.matching;
 
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
 import org.next.ws.web.game.GameService;
-import org.next.ws.web.game.Match;
+import org.next.ws.web.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class MatchingService {
 
     private static final Logger logger = LoggerFactory.getLogger(MatchingService.class);
 
-    private final Queue<SockJSSocket> waitingQue;
+    private final Queue<User> waitingQue;
 
     @Autowired
     GameService gameService;
@@ -27,10 +27,10 @@ public class MatchingService {
     }
 
 
-    public void enqueue(SockJSSocket sockJSSocket) {
-        waitingQue.add(sockJSSocket);
-        sockJSSocket.endHandler(event -> {
-           waitingQue.remove(sockJSSocket);
+    public void enqueue(User user) {
+        waitingQue.add(user);
+        user.getSockJSSocket().endHandler(event -> {
+           waitingQue.remove(user);
         });
     }
 
@@ -39,9 +39,9 @@ public class MatchingService {
     private void makeMatch() {
         logger.debug("매칭을 시작합니다. {}", waitingQue);
         while (waitingQue.size() >= 2) {
-            SockJSSocket sockJSSocket = waitingQue.poll();
-            SockJSSocket sockJSSocket2 = waitingQue.poll();
-            gameService.makeMatch(sockJSSocket, sockJSSocket2);
+            User user = waitingQue.poll();
+            User user2 = waitingQue.poll();
+            gameService.makeMatch(user, user2);
         }
     }
 
