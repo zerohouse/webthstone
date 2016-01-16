@@ -1,7 +1,5 @@
-package org.next.ws.web.user;
+package org.next.ws.web.jeo.user;
 
-import io.netty.util.internal.chmv8.ConcurrentHashMapV8;
-import io.vertx.core.impl.ConcurrentHashSet;
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
 import org.springframework.stereotype.Component;
 
@@ -16,13 +14,19 @@ public class UserRepository {
         String id = sockJSSocket.writeHandlerID();
         User user = userMap.get(id);
         if (user == null) {
-            user = new User(sockJSSocket);
-            userMap.put(id, user);
-            sockJSSocket.endHandler(event -> {
-                userMap.remove(id);
-            });
-            return new User(sockJSSocket);
+            return newUser(sockJSSocket);
         }
         return user;
     }
+
+    public User newUser(SockJSSocket sockJSSocket) {
+        String id = sockJSSocket.writeHandlerID();
+        User user = new User(sockJSSocket);
+        userMap.put(id, user);
+        sockJSSocket.endHandler(event -> {
+            userMap.remove(id);
+        });
+        return new User(sockJSSocket);
+    }
+
 }

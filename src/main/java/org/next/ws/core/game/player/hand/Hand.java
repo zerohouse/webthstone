@@ -5,7 +5,7 @@ import lombok.ToString;
 import org.next.ws.core.StaticValues;
 import org.next.ws.core.card.Card;
 import org.next.ws.core.card.CardDto;
-import org.next.ws.core.card.UnUsableCardException;
+import org.next.ws.core.card.exception.CardNotExistException;
 import org.next.ws.core.game.camp.Camp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,11 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@ToString(exclude = {"camp"})
+@ToString
 @Getter
 public class Hand {
-
-    private final Camp camp;
 
     private static final Logger logger = LoggerFactory.getLogger(Hand.class);
 
@@ -27,7 +25,6 @@ public class Hand {
     private List<Card> cards;
 
     public Hand(Camp camp) {
-        this.camp = camp;
         this.maxSize = StaticValues.DEFAULT_HAND_MAX_SIZE;
         cards = new ArrayList<>();
         burnedSize = 0;
@@ -46,16 +43,17 @@ public class Hand {
         return cards.size();
     }
 
-    public Card pickCard(Integer index) throws UnUsableCardException {
-        Card card = cards.get(index);
-        if (!card.usable(camp)) {
-            throw new UnUsableCardException();
-        }
-        cards.remove(card);
-        return card;
+    public Card pickCard(Integer id) throws CardNotExistException {
+        if(!cards.stream().filter(card -> card.getCardIdInGame().equals(id)).findAny().isPresent())
+            throw new CardNotExistException();
+        return cards.stream().filter(card -> card.getCardIdInGame().equals(id)).findAny().get();
     }
 
     public List<CardDto> getCardDtoList() {
         return cards.stream().map(CardDto::new).collect(Collectors.toList());
+    }
+
+    public void useCard(Card card) {
+        cards.remove(card);
     }
 }

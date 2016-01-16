@@ -12,9 +12,10 @@ public class CardDto {
     private String title;
     private String desc;
     private String img;
+    private int id;
 
     public CardDto(Card card) {
-
+        this.id = card.getCardIdInGame();
         this.cost = card.getCost().getCost();
         this.title = card.getName();
         this.desc = card.getDesc();
@@ -23,6 +24,5 @@ public class CardDto {
             return;
         this.attack = card.getFighters().get(0).getAttackPower().getPower();
         this.vital = card.getFighters().get(0).getVital().getVital();
-
     }
 }

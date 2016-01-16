@@ -1,12 +1,11 @@
 package org.next.ws.web.matching;
 
-import io.vertx.ext.web.handler.sockjs.SockJSSocket;
 import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.game.player.Player;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.hero.Hero;
 import org.next.ws.web.jeo.Jeo;
-import org.next.ws.web.user.User;
+import org.next.ws.web.jeo.user.User;
 
 public class SocketUserPlayer extends Player {
     private User user;

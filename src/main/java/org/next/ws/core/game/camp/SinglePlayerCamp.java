@@ -7,6 +7,7 @@ import org.next.ws.core.action.Action;
 import org.next.ws.core.card.Card;
 import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.fighter.Fighter;
+import org.next.ws.core.game.Game;
 import org.next.ws.core.game.player.EnemyPlayerDto;
 import org.next.ws.core.game.player.Player;
 import org.next.ws.core.game.player.PlayerDto;
@@ -37,7 +38,9 @@ public class SinglePlayerCamp extends Camp {
             return;
         }
         player.drawCard(4);
-        player.getHand().addCard(new Card(SpellCard.COIN));
+        Card card = new Card(SpellCard.COIN);
+        card.generateCardIdInGame(game);
+        player.getHand().addCard(card);
     }
 
 
@@ -87,6 +90,11 @@ public class SinglePlayerCamp extends Camp {
     public void gameStateUpdate() {
         player.broadCastEvent(GameEventType.PLAYER_UPDATE, new PlayerDto(player));
         player.broadCastEvent(GameEventType.ENEMY_UPDATE, new EnemyPlayerDto(enemy.getPlayingPlayer()));
+    }
+
+    @Override
+    public void generateCardIdInGame(Game game) {
+        player.generateCardIdInGame(game);
     }
 
     @Override

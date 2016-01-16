@@ -50,4 +50,5 @@ public abstract class Camp {
     }
 
 
+    public abstract void generateCardIdInGame(Game game);
 }

@@ -24,8 +24,10 @@ public class Game {
     public void setCamp(Camp one, Camp another) {
         one.setEnemy(another);
         one.setGame(this);
+        one.generateCardIdInGame(this);
         another.setEnemy(one);
         another.setGame(this);
+        another.generateCardIdInGame(this);
 
         boolean first = random.nextBoolean();
         if (first) {
@@ -45,8 +47,8 @@ public class Game {
         campFirst.ready(true);
         campSecond.ready(false);
         gameStateUpdate();
-        campFirst.startTurn();
         broadCast(GameEventType.START);
+        campFirst.startTurn();
     }
 
     private void broadCast(GameEventType start) {
@@ -65,5 +67,11 @@ public class Game {
 
     public void end() {
 
+    }
+
+    private int cardId = 0;
+
+    public int getNextCardId() {
+        return cardId++;
     }
 }
