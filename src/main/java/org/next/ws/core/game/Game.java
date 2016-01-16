@@ -18,7 +18,6 @@ public class Game {
     private Random random;
 
     public Game() {
-        this.phase = 0;
         random = new Random();
     }
 
@@ -38,8 +37,6 @@ public class Game {
         }
     }
 
-    private int phase;
-
     private Camp campFirst;
     private Camp campSecond;
 
@@ -48,43 +45,25 @@ public class Game {
         campFirst.ready(true);
         campSecond.ready(false);
         gameStateUpdate();
-        phaseStart();
-    }
-
-
-
-    private void phaseStart() {
-        logger.debug("phase start");
-        phase++;
         campFirst.startTurn();
+        broadCast(GameEventType.START);
     }
 
-    public void turnOver() {
-        logger.debug("turn over");
-        boolean isFirst = campFirst.isTurn();
-        if (isFirst) {
-            campFirst.endTurn();
-            campSecond.startTurn();
-            return;
-        }
-        campSecond.endTurn();
-        phaseStart();
+    private void broadCast(GameEventType start) {
+        broadCast(start, null);
     }
 
-    public void broadCast(GameEventType type, Object result){
+    public void broadCast(GameEventType type, Object result) {
         campFirst.broadCast(type, result);
         campSecond.broadCast(type, result);
     }
 
     private void gameStateUpdate() {
-        campFirst.broadCast(GameEventType.UPDATE, new GameStateDto(this));
         campFirst.gameStateUpdate();
-        campSecond.broadCast(GameEventType.UPDATE, new GameStateDto(this));
         campSecond.gameStateUpdate();
     }
 
     public void end() {
-
 
     }
 }

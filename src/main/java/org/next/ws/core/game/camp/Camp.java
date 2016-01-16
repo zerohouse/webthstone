@@ -23,12 +23,7 @@ public abstract class Camp {
     protected boolean turn;
     protected Game game;
 
-
     public abstract void ready(boolean first);
-
-    protected abstract void turnStartAction();
-
-    protected abstract void turnEndAction();
 
     public abstract Player getPlayingPlayer();
 
@@ -38,26 +33,21 @@ public abstract class Camp {
 
     public abstract String getName();
 
+    public abstract void startTurn();
+
+    public abstract void endTurn();
+
+
+    public abstract void broadCast(GameEventType gameEvent, Object result);
+
+    protected abstract void broadCast(GameEventType gameEvent);
+
+    public abstract void gameStateUpdate();
+
     public Camp() {
         startTurnEffects = new ArrayList<>();
         endTurnEffects = new ArrayList<>();
     }
 
-    public void startTurn() {
-        startTurnEffects.forEach(Action::act);
-        this.turnStartAction();
-        this.turn = true;
-
-    }
-
-    public void endTurn() {
-        endTurnEffects.forEach(Action::act);
-        this.turnEndAction();
-        this.turn = false;
-    }
-
-    public abstract void broadCast(GameEventType gameEvent, Object result);
-
-    public abstract void gameStateUpdate();
 
 }
