@@ -6,7 +6,7 @@ import org.next.ws.core.hero.AbstractHero;
 
 @Getter
 public class Warrior extends AbstractHero {
-    public Warrior(String name, Game game) {
-        super(name, new WarriorAbility(), game);
+    public Warrior(String name, String img, Game game) {
+        super(name, img, new WarriorAbility(), game);
     }
 }

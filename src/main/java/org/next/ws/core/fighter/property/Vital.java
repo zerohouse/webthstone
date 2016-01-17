@@ -6,13 +6,12 @@ import org.next.ws.core.StaticValues;
 @Getter
 public class Vital {
 
-    private int minVital;
-    private int vital;
-    private int maxVital;
+    int minVital;
+    int vital;
+    int maxVital;
 
-    Vital(int vital) {
-        this.vital = vital;
-        this.maxVital = vital;
+    public Vital(int vital) {
+        this.vital = this.maxVital = vital;
         this.minVital = StaticValues.DEFAULT_MIN_VITAL;
     }
 

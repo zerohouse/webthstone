@@ -44,8 +44,6 @@ public class Hand {
     }
 
     public Card pickCard(Integer id) throws CardNotExistException {
-        if(!cards.stream().filter(card -> card.getCardIdInGame().equals(id)).findAny().isPresent())
-            throw new CardNotExistException();
         return cards.stream().filter(card -> card.getCardIdInGame().equals(id)).findAny().get();
     }
 

@@ -7,10 +7,10 @@ import java.util.TimerTask;
 
 public class Util {
     public static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private static Timer timer = new Timer();
 
 
-    public static void setTimeout(Runnable runnable, int timeout) {
+    public static Timer setTimeout(Runnable runnable, int timeout) {
+        Timer timer = new Timer();
         timer.schedule(
                 new TimerTask() {
                     @Override
@@ -19,5 +19,12 @@ public class Util {
                     }
                 }, timeout
         );
+        return timer;
+    }
+
+    public static <T> T assureNotNull(T obj) {
+        if (obj == null)
+            throw new WrongAccessException();
+        return obj;
     }
 }

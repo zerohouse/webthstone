@@ -14,7 +14,7 @@ public class SinglePlayerCampTest {
 
     @Before
     public void setUp() throws Exception {
-        singlePlayerCamp = new SinglePlayerCamp(new ConsoleTestingPlayer(new Healer("사제", null), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]")));
+        singlePlayerCamp = new SinglePlayerCamp(new ConsoleTestingPlayer(new Healer("사제", "/resource/icon/coin.img", null), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]")));
     }
 
     @Test

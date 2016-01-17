@@ -1,10 +1,9 @@
 package org.next.ws.core.game.camp;
 
 import lombok.ToString;
-import org.next.ws.cards.SpellCard;
 import org.next.ws.core.StaticValues;
-import org.next.ws.core.action.Action;
 import org.next.ws.core.card.Card;
+import org.next.ws.core.card.UseCardTemplate;
 import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.Game;
@@ -17,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 @ToString
 public class SinglePlayerCamp extends Camp {
@@ -24,6 +24,7 @@ public class SinglePlayerCamp extends Camp {
     private static final Logger logger = LoggerFactory.getLogger(SinglePlayerCamp.class);
 
     Player player;
+    Timer timer;
 
     public SinglePlayerCamp(Player player) {
         this.player = player;
@@ -38,7 +39,7 @@ public class SinglePlayerCamp extends Camp {
             return;
         }
         player.drawCard(4);
-        Card card = new Card(SpellCard.COIN);
+        Card card = new Card(UseCardTemplate.COIN);
         card.generateCardIdInGame(game);
         player.getHand().addCard(card);
     }
@@ -52,25 +53,33 @@ public class SinglePlayerCamp extends Camp {
     @Override
     public void startTurn() {
         logger.debug("{} 턴을 시작합니다.", player.getGameHero().getName());
-        startTurnEffects.forEach(Action::act);
-        player.getGameHero().manaAdd(1);
+        startTurnEffects.forEach(action -> {
+            action.act(this, null);
+        });
+        player.getGameHero().startTurn();
+        player.getField().startTurn();
         player.drawCard(1);
         this.turn = true;
         broadCast(GameEventType.START_TURN);
         enemy.broadCast(GameEventType.ENEMY_TURN);
         gameStateUpdate();
 
-        Util.setTimeout(() -> {
+        timer = Util.setTimeout(() -> {
             if (turn) endTurn();
         }, StaticValues.TURN_TIME_OUT);
-
     }
 
     @Override
     public void endTurn() {
+        if (!turn)
+            return;
+        timer.cancel();
         logger.debug("{} 턴을 마칩니다.", player.getGameHero().getName());
-        endTurnEffects.forEach(Action::act);
+        endTurnEffects.forEach(action -> {
+            action.act(this, null);
+        });
         this.turn = false;
+        player.getField().endTurn();
         this.enemy.startTurn();
         broadCast(GameEventType.END_TURN);
         gameStateUpdate();

@@ -1,9 +1,10 @@
 package org.next.ws.web.jeo;
 
-import io.vertx.ext.web.handler.sockjs.SockJSSocket;
+import org.next.ws.core.card.exception.CardUnUsableException;
+import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.util.Util;
+import org.next.ws.web.jeo.user.MyTurnOnly;
 import org.next.ws.web.jeo.user.User;
-import org.next.ws.web.jeo.user.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +83,8 @@ public class JeoEventResolver {
 
         public void execute(String type, Map<String, Object> params, User user) {
             try {
-                Object result = method.invoke(instance, getParameters(method, params, user));
+                Object[] parameters = getParameters(method, params, user);
+                Object result = method.invoke(instance, parameters);
                 if (result == null)
                     return;
                 String event = "".equals(makeEvent) ? type : makeEvent;
@@ -90,10 +92,13 @@ public class JeoEventResolver {
             } catch (IllegalAccessException | InvocationTargetException e) {
                 logger.warn("error occurred when execute method");
                 e.printStackTrace();
+            } catch (CardUnUsableException e) {
+                logger.warn(e.getMessage());
+                user.getPlayer().broadCastEvent(GameEventType.WARN, e.getMessage());
             }
         }
 
-        private Object[] getParameters(Method method, Map<String, Object> params, User user) {
+        private Object[] getParameters(Method method, Map<String, Object> params, User user) throws CardUnUsableException {
             Parameter[] parameters = method.getParameters();
 
             List<Object> parameterList = new ArrayList<>();
@@ -108,14 +113,23 @@ public class JeoEventResolver {
         /*
         * 파라미터 핸들링
         * */
-        private Object getParameter(Parameter parameter, Map<String, Object> params, User user, String paramName) {
+        private Object getParameter(Parameter parameter, Map<String, Object> params, User user, String paramName) throws CardUnUsableException {
             if (params != null && parameter.getType().isAssignableFrom(params.getClass()))
                 return params;
-            if (parameter.getType().isAssignableFrom(User.class))
-                return user;
-            if (params != null && parameter.getType().isAssignableFrom(params.get(paramName).getClass()))
+            if (parameter.getType().isAssignableFrom(User.class)) {
+                return checkedUser(parameter, user);
+            }
+            if (params != null && params.get(paramName) != null && parameter.getType().isAssignableFrom(params.get(paramName).getClass()))
                 return params.get(paramName);
             return null;
+        }
+
+        private User checkedUser(Parameter parameter, User user) throws CardUnUsableException {
+            if (!parameter.isAnnotationPresent(MyTurnOnly.class))
+                return user;
+            if (!user.getPlayer().getCamp().isTurn())
+                throw new CardUnUsableException("상대의 차례입니다.");
+            return user;
         }
     }
 }

@@ -6,7 +6,7 @@ import org.next.ws.core.hero.AbstractHero;
 
 @Getter
 public class Hunter extends AbstractHero {
-    public Hunter(String name, Game game) {
-        super(name, new HunterAbility(), game);
+    public Hunter(String name, String img, Game game) {
+        super(name, img, new HunterAbility(), game);
     }
 }

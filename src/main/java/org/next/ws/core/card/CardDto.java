@@ -15,14 +15,14 @@ public class CardDto {
     private int id;
 
     public CardDto(Card card) {
-        this.id = card.getCardIdInGame();
-        this.cost = card.getCost().getCost();
-        this.title = card.getName();
-        this.desc = card.getDesc();
-        this.img = card.getImg();
-        if (card.getFighters().size() == 0)
+        this.id = card.cardIdInGame;
+        this.cost = card.cost.getCost();
+        this.title = card.name;
+        this.desc = card.desc;
+        this.img = card.img;
+        if (card.fighter == null)
             return;
-        this.attack = card.getFighters().get(0).getAttackPower().getPower();
-        this.vital = card.getFighters().get(0).getVital().getVital();
+        this.attack = card.fighter.getAttackPower().getPower();
+        this.vital = card.fighter.getVital().getVital();
     }
 }

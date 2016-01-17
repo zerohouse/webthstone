@@ -29,7 +29,7 @@ public class MatchingService {
     public void enqueue(User user) {
         waitingQue.add(user);
         user.getSockJSSocket().endHandler(event -> {
-           waitingQue.remove(user);
+            waitingQue.remove(user);
         });
     }
 
@@ -46,8 +46,8 @@ public class MatchingService {
     private void makeGameAndStart(User user, User user2) {
         Game game = new Game();
         try {
-            SocketUserPlayer player1 = new SocketUserPlayer(user, new Healer("사제", game), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]"));
-            SocketUserPlayer player2 = new SocketUserPlayer(user2, new Healer("사제", game), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]"));
+            SocketUserPlayer player1 = new SocketUserPlayer(user, new Healer("사제", "/resource/icon/coin.img", game), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]"));
+            SocketUserPlayer player2 = new SocketUserPlayer(user2, new Healer("사제", "/resource/icon/coin.img", game), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]"));
 
             user.setPlayer(player1);
             user.setGame(game);
@@ -60,7 +60,6 @@ public class MatchingService {
             e.printStackTrace();
         }
     }
-
 
 
 }

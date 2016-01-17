@@ -60,7 +60,7 @@ public class Game {
         campSecond.broadCast(type, result);
     }
 
-    private void gameStateUpdate() {
+    public void gameStateUpdate() {
         campFirst.gameStateUpdate();
         campSecond.gameStateUpdate();
     }
@@ -69,9 +69,15 @@ public class Game {
 
     }
 
-    private int cardId = 0;
 
-    public int getNextCardId() {
-        return cardId++;
+    /*
+    * 0 = 내 히어로
+    * 1 = 적 히어로
+    * */
+
+    private int id = 2;
+
+    public int getNextId() {
+        return id++;
     }
 }

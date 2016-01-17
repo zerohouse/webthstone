@@ -2,9 +2,8 @@ package org.next.ws.core.game.player.deck;
 
 import lombok.Getter;
 import lombok.ToString;
-import org.next.ws.cards.CardFactory;
 import org.next.ws.core.card.Card;
-import org.next.ws.core.game.Game;
+import org.next.ws.factory.GameElementsFactory;
 import org.next.ws.util.Util;
 
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class Deck {
         cardIdList = Util.OBJECT_MAPPER.readValue(cardListString, List.class);
         cards = new Stack<>();
         cardIdList.forEach(id -> {
-            cards.add(CardFactory.getNewCardByTemplateId(id));
+            cards.add(GameElementsFactory.getNewCardByTemplateId(id));
         });
     }
 

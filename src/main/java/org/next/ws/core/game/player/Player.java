@@ -15,7 +15,7 @@ import org.next.ws.core.game.camp.Camp;
 import org.next.ws.core.game.field.Field;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.game.player.hand.Hand;
-import org.next.ws.core.game.player.hero.GameHero;
+import org.next.ws.core.game.player.hero.HeroFighter;
 import org.next.ws.core.game.player.secret.Secret;
 import org.next.ws.core.hero.Hero;
 import org.slf4j.Logger;
@@ -35,36 +35,35 @@ public abstract class Player {
     protected Field field;
 
     public Player(Hero hero, Deck deck) {
-        this.gameHero = new GameHero(hero);
+        this.gameHero = new HeroFighter(hero);
         this.secret = new ArrayList<>();
         this.deck = deck;
         this.hand = new Hand(camp);
         this.field = new Field();
         this.nullDeckCount = 0;
-        this.turn = false;
     }
 
     final Deck deck;
     final Hand hand;
-    final GameHero gameHero;
+    final HeroFighter gameHero;
 
 
     private final List<Secret> secret;
     private int nullDeckCount;
-    private boolean turn;
 
-    public void useCard(Integer id) {
+    public void useCard(Integer id, List<Fighter> targetList) {
         try {
             Card card = this.hand.pickCard(id);
-            card.use(camp);
-            this.hand.useCard(card);
+            card.use(camp, targetList);
+            camp.getEnemy().broadCast(GameEventType.ENEMY_USE_CARD, card.getName());
+            broadCastEvent(GameEventType.USE_CARD, card.getName());
             logger.debug("카드사용 {}", card);
         } catch (CardNotExistException e) {
             logger.debug("카드불가 사용 불가");
-            broadCastEvent(GameEventType.ERROR, "잘못된 접근입니다. 손에 없는 카드를 쓰려고 했습니다.");
+            broadCastEvent(GameEventType.WARN, "잘못된 접근입니다. 손에 없는 카드를 쓰려고 했습니다.");
         } catch (CardUnUsableException e) {
             logger.debug("카드불가 사용 불가 {}", e.getMessage());
-            broadCastEvent(GameEventType.ERROR, e.getMessage());
+            broadCastEvent(GameEventType.WARN, e.getMessage());
         }
 
     }
@@ -100,16 +99,36 @@ public abstract class Player {
 
     public abstract void broadCastEvent(GameEventType type, Object result);
 
-    public boolean addAble(List<Fighter> fighters) {
-        return field.addAble(fighters);
+    public void broadCastEvent(GameEventType type) {
+        broadCastEvent(type, null);
     }
 
-    public void addFighters(List<Fighter> fighters) {
-        field.addFighters(fighters);
+    public boolean addAble() {
+        return field.addAble();
+    }
+
+    public void addFighter(Fighter fighter) {
+        field.addFighter(fighter);
     }
 
     public void generateCardIdInGame(Game game) {
         deck.getCards().forEach(card -> card.generateCardIdInGame(game));
         hand.getCards().forEach(card -> card.generateCardIdInGame(game));
+    }
+
+    public void useMana(Cost cost) {
+        gameHero.getMana().add(-cost.getCost());
+    }
+
+    public void win() {
+        broadCastEvent(GameEventType.WIN);
+    }
+
+    public void lose() {
+        broadCastEvent(GameEventType.LOSE);
+    }
+
+    public List<Fighter> resolveTargetList(List<Integer> targetList) {
+        return null;
     }
 }

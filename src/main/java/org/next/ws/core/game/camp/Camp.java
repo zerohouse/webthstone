@@ -3,6 +3,7 @@ package org.next.ws.core.game.camp;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.next.ws.core.StaticValues;
 import org.next.ws.core.action.Action;
 import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.fighter.Fighter;
@@ -51,4 +52,18 @@ public abstract class Camp {
 
 
     public abstract void generateCardIdInGame(Game game);
+
+    public Fighter getFighterById(Integer id) {
+        if (id.equals(StaticValues.MY_GAME_HERO_ID))
+            return getPlayingPlayer().getGameHero();
+        if (id.equals(StaticValues.ENEMY_GAME_HERO_ID))
+            return enemy.getPlayingPlayer().getGameHero();
+        if (getFieldFighters().stream().filter(fighter -> id.equals(fighter.getId())).findAny().isPresent())
+            return getFieldFighters().stream().filter(fighter -> id.equals(fighter.getId())).findAny().get();
+        if (enemy.getFieldFighters().stream().filter(fighter -> id.equals(fighter.getId())).findAny().isPresent())
+            return enemy.getFieldFighters().stream().filter(fighter -> id.equals(fighter.getId())).findAny().get();
+        return null;
+    }
+
+
 }

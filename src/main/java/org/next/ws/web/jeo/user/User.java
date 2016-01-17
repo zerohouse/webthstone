@@ -17,9 +17,7 @@ public class User {
         this.sockJSSocket = sockJSSocket;
     }
 
-
     public void setPlayer(SocketUserPlayer player) {
         this.player = player;
     }
-
 }

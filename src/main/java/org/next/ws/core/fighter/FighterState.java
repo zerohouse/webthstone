@@ -1,5 +1,5 @@
 package org.next.ws.core.fighter;
 
-public enum FighterTemplate {
+public enum FighterState {
     FROZEN, PROTECTED, HIDE
 }

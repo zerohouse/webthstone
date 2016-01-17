@@ -3,6 +3,7 @@ package org.next.ws.core.game.field;
 import lombok.Getter;
 import lombok.ToString;
 import org.next.ws.core.StaticValues;
+import org.next.ws.core.fighter.FieldFighter;
 import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.fighter.FighterDto;
 
@@ -22,15 +23,27 @@ public class Field {
         fighters = new ArrayList<>();
     }
 
-    public boolean addAble(List<Fighter> fighters) {
-        return fighters.size() + this.fighters.size() > fieldMax;
+    public boolean addAble() {
+        return this.fighters.size() + 1 < fieldMax;
     }
 
-    public void addFighters(List<Fighter> fighters) {
-        this.fighters.addAll(fighters);
+    public void addFighter(Fighter fighter) {
+        this.fighters.add(fighter);
     }
 
     public List<FighterDto> getFighterDtoList() {
         return fighters.stream().map(FighterDto::new).collect(Collectors.toList());
+    }
+
+    public void startTurn() {
+        fighters.forEach(Fighter::startTurn);
+    }
+
+    public void endTurn() {
+        fighters.forEach(Fighter::endTurn);
+    }
+
+    public void removeFighter(FieldFighter fieldFighter) {
+        fighters.remove(fieldFighter);
     }
 }
