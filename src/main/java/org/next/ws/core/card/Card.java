@@ -65,6 +65,8 @@ public class Card {
 
 
     public void generateCardIdInGame(Game game) {
+        if (game == null)
+            return;
         cardIdInGame = game.getNextId();
         if (this.fighter != null)
             fighter.setId(game.getNextId());
