@@ -29,7 +29,6 @@ node_modules/
 
 ### Gradle ###
 .gradle
-gradle
 build/
 
 # Ignore Gradle GUI config
