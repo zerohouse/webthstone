@@ -5,6 +5,7 @@ import org.next.ws.core.StaticValues;
 import org.next.ws.core.card.Card;
 import org.next.ws.core.card.UseCardTemplate;
 import org.next.ws.core.event.standard.GameEventType;
+import org.next.ws.core.fighter.FieldFighter;
 import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.Game;
 import org.next.ws.core.game.player.EnemyPlayerDto;
@@ -104,6 +105,26 @@ public class SinglePlayerCamp extends Camp {
     @Override
     public void generateCardIdInGame(Game game) {
         player.generateCardIdInGame(game);
+    }
+
+    @Override
+    public void removeFighter(FieldFighter fieldFighter) {
+        player.getField().removeFighter(fieldFighter);
+    }
+
+    @Override
+    public void addFighter(Fighter fighter) {
+        player.getField().addFighter(fighter);
+    }
+
+    @Override
+    public void lose() {
+        this.player.lose();
+    }
+
+    @Override
+    public void win() {
+        this.player.win();
     }
 
     @Override

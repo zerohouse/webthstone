@@ -73,9 +73,13 @@ public class Game {
     /*
     * 0 = 내 히어로
     * 1 = 적 히어로
+    * ~
+    * 99번까지 예약.
+    *
+    *
     * */
 
-    private int id = 2;
+    private int id = 100;
 
     public int getNextId() {
         return id++;

@@ -55,7 +55,7 @@ public class Card {
         if (this.fighter != null) {
             fighter.setCamp(camp);
             fighter.getAttackPower().setCount(StaticValues.DEFAULT_ATTACK_COUNT_WHEN_PLAYED);
-            player.addFighter(fighter);
+            camp.addFighter(fighter);
         }
         player.useMana(cost);
 

@@ -10,7 +10,7 @@ public class FieldFighter extends Fighter {
 
     @Override
     public void die() {
-        camp.getPlayingPlayer().getField().removeFighter(this);
+        camp.removeFighter(this);
         deathAction.act(camp, null);
     }
 }

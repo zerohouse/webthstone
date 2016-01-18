@@ -6,6 +6,7 @@ import lombok.ToString;
 import org.next.ws.core.StaticValues;
 import org.next.ws.core.action.Action;
 import org.next.ws.core.event.standard.GameEventType;
+import org.next.ws.core.fighter.FieldFighter;
 import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.Game;
 import org.next.ws.core.game.player.Player;
@@ -66,4 +67,11 @@ public abstract class Camp {
     }
 
 
+    public abstract void removeFighter(FieldFighter fieldFighter);
+
+    public abstract void addFighter(Fighter fighter);
+
+    public abstract void lose();
+
+    public abstract void win();
 }

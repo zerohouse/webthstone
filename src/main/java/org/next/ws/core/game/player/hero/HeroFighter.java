@@ -26,8 +26,8 @@ public class HeroFighter extends Fighter {
 
     @Override
     public void die() {
-        camp.getPlayingPlayer().lose();
-        camp.getEnemy().getPlayingPlayer().win();
+        camp.lose();
+        camp.win();
         camp.getGame().end();
     }
 

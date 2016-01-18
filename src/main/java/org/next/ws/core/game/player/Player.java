@@ -86,6 +86,8 @@ public abstract class Player {
 
     public void nullCardEvent() {
         nullDeckCount++;
+        gameHero.addVital(-nullDeckCount);
+        broadCastEvent(GameEventType.CARD_DECK_NULL, nullDeckCount);
         logger.debug("player deck empty - count:{}", nullDeckCount);
     }
 
