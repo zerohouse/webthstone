@@ -1,37 +1,20 @@
 package org.next.ws.core.card;
 
-public class CardTemplate {
+public interface CardTemplate {
 
-    private CardTemplate(Integer cost, String name, String desc, String img) {
-        this.cost = cost;
-        this.name = name;
-        this.desc = desc;
-        this.img = img;
-    }
+    Integer getCost();
 
-    public CardTemplate(Integer cost, String name, String desc, String img, String actionString) {
-        this(cost, name, desc, img);
-        this.fighter = false;
-        this.actionString = actionString;
-    }
+    String getImg();
 
-    public CardTemplate(Integer cost, String name, String desc, String img, Integer attack, Integer vital) {
-        this(cost, name, desc, img);
-        this.fighter = true;
-        this.attack = attack;
-        this.vital = vital;
-    }
+    String getName();
 
-    Integer cost;
-    String name;
-    String desc;
-    String img;
+    String getDesc();
 
-    String actionString;
+    boolean isFighter();
 
-    boolean fighter;
-    Integer attack;
-    Integer vital;
+    Integer getAttack();
 
+    Integer getVital();
 
+    String getActionString();
 }

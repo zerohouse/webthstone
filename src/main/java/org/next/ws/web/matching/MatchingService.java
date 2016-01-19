@@ -4,7 +4,7 @@ import org.next.ws.core.game.Game;
 import org.next.ws.core.game.camp.SinglePlayerCamp;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.hero.healer.Healer;
-import org.next.ws.web.jeo.user.User;
+import org.next.ws.web.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -26,11 +26,16 @@ public class MatchingService {
     }
 
 
-    public void enqueue(User user) {
+    public String enqueue(User user) {
+        if(user.getGame()!= null)
+            return "게임에 이미 참여하고 있습니다.";
+        if(waitingQue.contains(user))
+            return "이미 대기 중입니다.";
         waitingQue.add(user);
         user.getSockJSSocket().endHandler(event -> {
             waitingQue.remove(user);
         });
+        return "같이 게임할 사람을 기다립니다.";
     }
 
     @Scheduled(fixedDelay = 5000)

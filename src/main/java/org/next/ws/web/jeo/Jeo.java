@@ -11,7 +11,6 @@ import org.next.ws.util.Util;
 import java.util.Map;
 
 /**
- * Created by dev on 2016-01-15.
  * Json Event Object
  * <p>
  * 제이슨으로 이벤트 전달 및 실행.
@@ -20,6 +19,7 @@ import java.util.Map;
 @Setter
 @NoArgsConstructor
 public class Jeo {
+    public static final String MESSAGE = "message";
     private String type;
     private Map<String, Object> params;
     private Object result;

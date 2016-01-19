@@ -1,9 +1,10 @@
-package org.next.ws.web.jeo.user;
+package org.next.ws.web.user;
 
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
 import lombok.Getter;
 import lombok.Setter;
 import org.next.ws.core.game.Game;
+import org.next.ws.web.jeo.Jeo;
 import org.next.ws.web.matching.SocketUserPlayer;
 
 @Getter
@@ -19,5 +20,10 @@ public class User {
 
     public void setPlayer(SocketUserPlayer player) {
         this.player = player;
+    }
+
+    public void sendMessage(String message) {
+        Jeo.event(sockJSSocket, Jeo.MESSAGE, message);
+
     }
 }

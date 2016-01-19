@@ -3,7 +3,7 @@ package org.next.ws.core.game.camp;
 import lombok.ToString;
 import org.next.ws.core.StaticValues;
 import org.next.ws.core.card.Card;
-import org.next.ws.core.card.UseCardTemplate;
+import org.next.ws.core.card.StaticCardTemplate;
 import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.fighter.FieldFighter;
 import org.next.ws.core.fighter.Fighter;
@@ -40,7 +40,7 @@ public class SinglePlayerCamp extends Camp {
             return;
         }
         player.drawCard(4);
-        Card card = new Card(UseCardTemplate.COIN);
+        Card card = new Card(StaticCardTemplate.COIN);
         card.generateCardIdInGame(game);
         player.getHand().addCard(card);
     }

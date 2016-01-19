@@ -5,8 +5,7 @@ import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.player.Player;
 import org.next.ws.web.jeo.JeoController;
 import org.next.ws.web.jeo.JeoEvent;
-import org.next.ws.web.jeo.user.MyTurnOnly;
-import org.next.ws.web.jeo.user.User;
+import org.next.ws.web.user.User;
 
 import java.util.List;
 
@@ -16,9 +15,10 @@ import static org.next.ws.util.Util.assureNotNull;
 public class GameController {
 
     @JeoEvent("card.submit")
-    public void gamePlay(@MyTurnOnly User user, Integer id, List<Integer> targetList) {
-        user.getPlayer().useCard(id, user.getPlayer().resolveTargetList(targetList));
+    public void gamePlay(Player player, Integer id, List<Integer> targetList) {
+        player.useCard(id, player.resolveTargetList(targetList));
     }
+
 
     @JeoEvent("game.end_turn")
     public void endTurn(User user){
@@ -26,12 +26,11 @@ public class GameController {
     }
 
     @JeoEvent("game.fighter_attack")
-    public void attack(@MyTurnOnly User user, Integer by, Integer target){
-        Player player = assureNotNull(user.getPlayer());
+    public void attack(Player player, Integer by, Integer target){
         Fighter attacker = player.getCamp().getFighterById(by);
         Fighter defender = player.getCamp().getFighterById(target);
         attacker.attack(defender);
-        user.getGame().gameStateUpdate();
-        user.getGame().broadCast(GameEventType.ATTACK, "공격 : " + attacker.getName() + " -> " + defender.getName());
+        player.getCamp().getGame().gameStateUpdate();
+        player.getCamp().getGame().broadCast(GameEventType.ATTACK, "공격 : " + attacker.getName() + " -> " + defender.getName());
     }
 }

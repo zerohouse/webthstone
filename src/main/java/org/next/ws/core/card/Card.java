@@ -28,14 +28,14 @@ public class Card {
     Integer cardIdInGame;
 
     public Card(CardTemplate cardTemplate) {
-        this.cost = new Cost(cardTemplate.cost);
-        this.name = cardTemplate.name;
-        this.desc = cardTemplate.desc;
-        this.img = cardTemplate.img;
-        if (cardTemplate.fighter)
-            this.fighter = new FieldFighter(new AttackPower(cardTemplate.attack), new Vital(cardTemplate.vital), this.img, this.name);
+        this.cost = new Cost(cardTemplate.getCost());
+        this.name = cardTemplate.getName();
+        this.desc = cardTemplate.getDesc();
+        this.img = cardTemplate.getImg();
+        if (cardTemplate.isFighter())
+            this.fighter = new FieldFighter(new AttackPower(cardTemplate.getAttack()), new Vital(cardTemplate.getVital()), this.img, this.name);
         else
-            useAction = Action.getAction(cardTemplate.actionString);
+            useAction = Action.getAction(cardTemplate.getActionString());
     }
 
     private void usableCheck(Camp camp, List<Fighter> targetList) throws CardUnUsableException {

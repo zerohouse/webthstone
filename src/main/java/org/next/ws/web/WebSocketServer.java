@@ -5,15 +5,11 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.sockjs.SockJSHandler;
 import org.next.ws.web.jeo.WebSocketHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class WebSocketServer extends AbstractVerticle {
-
-    private static final Logger logger = LoggerFactory.getLogger(WebSocketServer.class);
 
     @Autowired
     WebSocketHandler webSocketHandlingService;
