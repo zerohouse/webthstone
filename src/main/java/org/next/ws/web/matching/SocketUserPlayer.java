@@ -4,7 +4,7 @@ import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.game.player.Player;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.hero.Hero;
-import org.next.ws.web.jeo.Jeo;
+import org.next.ws.jeo.Jeo;
 import org.next.ws.web.user.User;
 
 public class SocketUserPlayer extends Player {

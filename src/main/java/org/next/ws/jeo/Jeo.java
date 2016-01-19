@@ -1,4 +1,4 @@
-package org.next.ws.web.jeo;
+package org.next.ws.jeo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.vertx.core.buffer.Buffer;

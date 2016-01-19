@@ -1,28 +1,33 @@
 package org.next.ws.web.card;
 
-import org.next.ws.web.jeo.JeoController;
-import org.next.ws.web.jeo.JeoEvent;
-import org.next.ws.web.jeo.resolver.JsonParse;
+import org.next.ws.web.repository.CardEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
 
-@JeoController
+@RestController
+@RequestMapping("/api/card")
 public class CardController {
 
     @Autowired
     CardDao cardDao;
 
-    @JeoEvent("card.list")
+    @Autowired
+    CardEntityRepository cardEntityRepository;
+
+    @RequestMapping(method = RequestMethod.GET)
     public List<CardEntity> getCardList(Map<String, Object> params) {
         return cardDao.getList(params);
     }
 
-    @JeoEvent("card.save")
-    public void saveCard(@JsonParse CardEntity card) {
-        System.out.println(card);
+    @RequestMapping(method = RequestMethod.POST)
+    public Long saveCard(CardEntity card) {
+        cardEntityRepository.save(card);
+        return card.getId();
     }
-
 
 }

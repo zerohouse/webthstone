@@ -1,7 +1,7 @@
 package org.next.ws.web.room;
 
-import org.next.ws.web.jeo.JeoController;
-import org.next.ws.web.jeo.JeoEvent;
+import org.next.ws.jeo.JeoController;
+import org.next.ws.jeo.JeoEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

@@ -3,10 +3,8 @@ package org.next.ws.web.user;
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
 import org.next.ws.core.card.exception.CardUnUsableException;
 import org.next.ws.core.game.player.Player;
-import org.next.ws.web.jeo.resolver.JeoParameterResolver;
-import org.next.ws.web.jeo.resolver.ParameterResolver;
-import org.next.ws.web.user.User;
-import org.next.ws.web.user.UserRepository;
+import org.next.ws.jeo.resolver.JeoParameterResolver;
+import org.next.ws.jeo.resolver.ParameterResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.Parameter;

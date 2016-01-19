@@ -1,4 +1,4 @@
-package org.next.ws.web.jeo;
+package org.next.ws.jeo.resolver;
 
 import org.springframework.stereotype.Component;
 
@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Component
-public @interface JeoController {
+public @interface JeoParameterResolver {
 }

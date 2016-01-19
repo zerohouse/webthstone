@@ -1,4 +1,4 @@
-package org.next.ws.web.jeo;
+package org.next.ws.jeo;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;

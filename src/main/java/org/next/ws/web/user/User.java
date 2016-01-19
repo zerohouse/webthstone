@@ -4,7 +4,7 @@ import io.vertx.ext.web.handler.sockjs.SockJSSocket;
 import lombok.Getter;
 import lombok.Setter;
 import org.next.ws.core.game.Game;
-import org.next.ws.web.jeo.Jeo;
+import org.next.ws.jeo.Jeo;
 import org.next.ws.web.matching.SocketUserPlayer;
 
 @Getter

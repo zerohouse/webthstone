@@ -1,8 +1,8 @@
-package org.next.ws.web.jeo;
+package org.next.ws.jeo;
 
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
+import org.next.ws.jeo.resolver.*;
 import org.next.ws.util.Util;
-import org.next.ws.web.jeo.resolver.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

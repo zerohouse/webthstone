@@ -3,8 +3,8 @@ package org.next.ws.web.game;
 import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.player.Player;
-import org.next.ws.web.jeo.JeoController;
-import org.next.ws.web.jeo.JeoEvent;
+import org.next.ws.jeo.JeoController;
+import org.next.ws.jeo.JeoEvent;
 import org.next.ws.web.user.User;
 
 import java.util.List;

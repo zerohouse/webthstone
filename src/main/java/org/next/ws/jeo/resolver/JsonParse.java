@@ -1,4 +1,4 @@
-package org.next.ws.web.jeo.resolver;
+package org.next.ws.jeo.resolver;
 
 import java.lang.annotation.*;
 
