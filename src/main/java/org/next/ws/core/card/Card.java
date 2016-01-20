@@ -8,8 +8,6 @@ import org.next.ws.core.card.exception.CardUnUsableException;
 import org.next.ws.core.card.property.Cost;
 import org.next.ws.core.fighter.FieldFighter;
 import org.next.ws.core.fighter.Fighter;
-import org.next.ws.core.fighter.property.AttackPower;
-import org.next.ws.core.fighter.property.Vital;
 import org.next.ws.core.game.Game;
 import org.next.ws.core.game.camp.Camp;
 import org.next.ws.core.game.player.Player;
@@ -32,10 +30,10 @@ public class Card {
         this.name = cardTemplate.getName();
         this.desc = cardTemplate.getDesc();
         this.img = cardTemplate.getImg();
+        useAction = Action.getAction(cardTemplate.getActionString());
+
         if (cardTemplate.isFighter())
-            this.fighter = new FieldFighter(new AttackPower(cardTemplate.getAttack()), new Vital(cardTemplate.getVital()), this.img, this.name);
-        else
-            useAction = Action.getAction(cardTemplate.getActionString());
+            this.fighter = new FieldFighter(cardTemplate.getFighterTemplate());
     }
 
     private void usableCheck(Camp camp, List<Fighter> targetList) throws CardUnUsableException {

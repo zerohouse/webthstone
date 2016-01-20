@@ -28,4 +28,12 @@ public interface Action {
     static Action getAction(String key) {
         return ActionBuilder.getAction(key);
     }
+
+    static NonTargetAction getNontargetAction(String deathAction) {
+        return null;
+    }
+
+    static List<NonTargetAction> getNonTargetActionList(String deathAction) {
+        return null;
+    }
 }

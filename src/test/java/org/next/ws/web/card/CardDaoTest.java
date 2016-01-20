@@ -42,12 +42,12 @@ public class CardDaoTest {
 
     @Before
     public void setup() {
-        CardEntity cardEntity  = new CardEntity(4, 4, 5, "서리바람설인");
-        cardEntity.setId(1L);
-        CardEntity cardEntity1 = new CardEntity(3, 3, 4, "기계거미");
-        cardEntity1.setId(2L);
-        cardEntityRepository.save(cardEntity);
-        cardEntityRepository.save(cardEntity1);
+//        CardEntity cardEntity  = new CardEntity(4, 4, 5, "서리바람설인");
+//        cardEntity.setId(1L);
+//        CardEntity cardEntity1 = new CardEntity(3, 3, 4, "기계거미");
+//        cardEntity1.setId(2L);
+//        cardEntityRepository.save(cardEntity);
+//        cardEntityRepository.save(cardEntity1);
     }
 
 

@@ -3,12 +3,15 @@ package org.next.ws.core.fighter;
 import lombok.Getter;
 import lombok.Setter;
 import org.next.ws.core.action.Action;
+import org.next.ws.core.action.NonTargetAction;
 import org.next.ws.core.event.standard.GameEventType;
 import org.next.ws.core.fighter.property.AttackPower;
 import org.next.ws.core.fighter.property.MagicPower;
 import org.next.ws.core.fighter.property.Species;
 import org.next.ws.core.fighter.property.Vital;
 import org.next.ws.core.game.camp.Camp;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -21,12 +24,11 @@ public abstract class Fighter {
     protected FighterState fighterState;
     protected String name;
     protected String img;
-    protected Action deathAction;
-    protected Action birthAction;
-    protected Action turnStartAction;
-    protected Action turnEndAction;
-    protected Action AttackAction;
-    protected Action HeatedAction;
+    protected List<NonTargetAction> deathActionList;
+    protected List<NonTargetAction> turnStartActionList;
+    protected List<NonTargetAction> turnEndActionList;
+    protected List<NonTargetAction> AttackActionList;
+    protected List<NonTargetAction> HeatedActionList;
     protected int id;
     protected Camp camp;
 

@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Type;
 import org.next.ws.core.card.CardTemplate;
+import org.next.ws.core.fighter.FighterTemplate;
+import org.next.ws.web.fighter.FighterEntity;
 
 import javax.persistence.*;
 
@@ -15,6 +17,10 @@ import javax.persistence.*;
 @ToString
 @Entity
 public class CardEntity implements CardTemplate {
+
+    @ManyToOne
+    @JoinColumn
+    FighterEntity fighterTemplate;
 
     @Id
     @Column
@@ -38,18 +44,7 @@ public class CardEntity implements CardTemplate {
     private boolean fighter;
 
     @Column
-    private Integer attack;
-
-    @Column
-    private Integer vital;
-
-    @Column
     private String actionString;
 
-    public CardEntity(int cost, int attack, int vital, String name) {
-        this.cost = cost;
-        this.attack = attack;
-        this.vital = vital;
-        this.name = name;
-    }
+
 }

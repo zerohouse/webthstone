@@ -1,6 +1,8 @@
 package org.next.ws.core.card;
 
 import lombok.Getter;
+import org.next.ws.core.fighter.FighterTemplate;
+import org.next.ws.core.fighter.SimpleFighterTemplate;
 
 @Getter
 public class SimpleCardTemplate implements CardTemplate {
@@ -23,6 +25,7 @@ public class SimpleCardTemplate implements CardTemplate {
         this.fighter = true;
         this.attack = attack;
         this.vital = vital;
+        this.fighterTemplate = new SimpleFighterTemplate(name, img, attack, vital);
     }
 
     Integer cost;
@@ -35,4 +38,7 @@ public class SimpleCardTemplate implements CardTemplate {
     boolean fighter;
     Integer attack;
     Integer vital;
+
+    FighterTemplate fighterTemplate;
+
 }

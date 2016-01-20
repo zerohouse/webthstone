@@ -1,5 +1,7 @@
 package org.next.ws.core.card;
 
+import org.next.ws.core.fighter.FighterTemplate;
+
 public interface CardTemplate {
 
     Integer getCost();
@@ -10,11 +12,9 @@ public interface CardTemplate {
 
     String getDesc();
 
+    String getActionString();
+
     boolean isFighter();
 
-    Integer getAttack();
-
-    Integer getVital();
-
-    String getActionString();
+    FighterTemplate getFighterTemplate();
 }

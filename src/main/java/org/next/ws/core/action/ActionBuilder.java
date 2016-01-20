@@ -25,6 +25,8 @@ class ActionBuilder {
 
 
     static Action getAction(String actionString) {
+        if (actionString == null)
+            return null;
         try {
             if (!actionString.contains("|")) {
                 return (Action) actionMap.get(Integer.parseInt(actionString)).getDeclaredConstructor(String.class).newInstance("");
