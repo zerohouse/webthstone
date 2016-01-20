@@ -1,7 +1,6 @@
 package org.next.ws.jeo.resolver;
 
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
-import org.next.ws.core.card.exception.CardUnUsableException;
 
 import java.lang.reflect.Parameter;
 import java.util.Map;

@@ -1,8 +1,5 @@
 package org.next.ws.jeo;
 
-import org.springframework.stereotype.Component;
-
-import javax.persistence.SqlResultSetMapping;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

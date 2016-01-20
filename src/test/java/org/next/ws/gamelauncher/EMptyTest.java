@@ -2,14 +2,8 @@ package org.next.ws.gamelauncher;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.next.ws.core.event.standard.GameEventType;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.*;
 import java.util.Timer;
-import java.util.concurrent.*;
 
 public class EMptyTest {
 

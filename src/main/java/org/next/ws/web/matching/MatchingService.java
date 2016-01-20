@@ -1,7 +1,6 @@
 package org.next.ws.web.matching;
 
 import org.next.ws.core.game.Game;
-import org.next.ws.core.game.camp.SinglePlayerCamp;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.hero.healer.Healer;
 import org.next.ws.web.user.User;
@@ -27,9 +26,9 @@ public class MatchingService {
 
 
     public String enqueue(User user) {
-        if(user.getGame()!= null)
+        if (user.getGame() != null)
             return "게임에 이미 참여하고 있습니다.";
-        if(waitingQue.contains(user))
+        if (waitingQue.contains(user))
             return "이미 대기 중입니다.";
         waitingQue.add(user);
         user.getSockJSSocket().endHandler(event -> {
@@ -59,7 +58,7 @@ public class MatchingService {
             user2.setPlayer(player2);
             user2.setGame(game);
 
-            game.setCamp(new SinglePlayerCamp(player1), new SinglePlayerCamp(player2));
+            game.setPlayer(player1, player2);
             game.start();
         } catch (IOException e) {
             e.printStackTrace();

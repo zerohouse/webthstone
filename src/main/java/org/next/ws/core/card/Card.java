@@ -9,7 +9,6 @@ import org.next.ws.core.card.property.Cost;
 import org.next.ws.core.fighter.FieldFighter;
 import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.Game;
-import org.next.ws.core.game.camp.Camp;
 import org.next.ws.core.game.player.Player;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public class Card {
     Cost cost;
     String name;
     Action useAction;
-    Fighter fighter;
+    FieldFighter fighter;
     String desc;
     String img;
     Integer cardIdInGame;
@@ -36,29 +35,28 @@ public class Card {
             this.fighter = new FieldFighter(cardTemplate.getFighterTemplate());
     }
 
-    private void usableCheck(Camp camp, List<Fighter> targetList) throws CardUnUsableException {
-        if (!camp.getPlayingPlayer().hasEnoughMana(cost))
+    private void usableCheck(Player player, List<Fighter> targetList) throws CardUnUsableException {
+        if (!player.hasEnoughMana(cost))
             throw new CardUnUsableException("마나가 부족합니다.");
-        if (!camp.getPlayingPlayer().addAble())
+        if (!player.addAble())
             throw new CardUnUsableException("필드가 꽉차서 사용할 수 없습니다.");
         if (useAction != null)
-            useAction.ableCheck(camp, targetList);
+            useAction.able(player, targetList);
     }
 
-    public void use(Camp camp, List<Fighter> targetList) throws CardUnUsableException {
-        usableCheck(camp, targetList);
+    public void use(Player player, List<Fighter> targetList) throws CardUnUsableException {
+        usableCheck(player, targetList);
         if (useAction != null)
-            useAction.act(camp, targetList);
-        Player player = camp.getPlayingPlayer();
+            useAction.act(player, targetList);
         if (this.fighter != null) {
-            fighter.setCamp(camp);
+            fighter.setPlayer(player);
             fighter.getAttackPower().setCount(StaticValues.DEFAULT_ATTACK_COUNT_WHEN_PLAYED);
-            camp.addFighter(fighter);
+            player.addFighter(fighter);
         }
         player.useMana(cost);
 
         player.getHand().useCard(this);
-        camp.getGame().gameStateUpdate();
+        player.getGame().gameStateUpdate();
     }
 
 

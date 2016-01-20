@@ -3,7 +3,7 @@ package org.next.ws.core.action.impl;
 import org.next.ws.core.action.AmountRepeatAction;
 import org.next.ws.core.card.exception.CardUnUsableException;
 import org.next.ws.core.fighter.Fighter;
-import org.next.ws.core.game.camp.Camp;
+import org.next.ws.core.game.player.Player;
 
 import java.util.List;
 import java.util.Random;
@@ -17,13 +17,15 @@ public class RandomVitalAction extends AmountRepeatAction {
     }
 
     @Override
-    public void ableCheck(Camp camp, List<Fighter> targetList) throws CardUnUsableException {
-        if (targetList == null)
+    public boolean able(Player player, List<Fighter> targetList) throws CardUnUsableException {
+        if (targetList == null) {
             throw new CardUnUsableException("타겟을 지정해야 합니다.");
+        }
+        return true;
     }
 
     @Override
-    public void act(Camp camp, List<Fighter> targetList) {
+    public void act(Player player, List<Fighter> targetList) {
         for (int i = 0; i < repeat.getValue(); i++)
             randAttack(targetList);
     }

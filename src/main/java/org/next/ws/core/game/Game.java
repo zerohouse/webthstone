@@ -2,11 +2,15 @@ package org.next.ws.core.game;
 
 import lombok.Getter;
 import lombok.ToString;
-import org.next.ws.core.event.standard.GameEventType;
-import org.next.ws.core.game.camp.Camp;
+import org.next.ws.core.action.NonTargetAction;
+import org.next.ws.core.event.standard.CommunicateType;
+import org.next.ws.core.game.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 @Getter
@@ -21,7 +25,16 @@ public class Game {
         random = new Random();
     }
 
-    public void setCamp(Camp one, Camp another) {
+    public final Map<GameEventType, List<NonTargetAction>> events = new HashMap<>();
+
+    public void eventOccur(GameEventType type, Player trigger) {
+        events.get(type).forEach(nonTargetAction -> {
+            if (nonTargetAction.able(trigger))
+                nonTargetAction.act(trigger);
+        });
+    }
+
+    public void setPlayer(Player one, Player another) {
         one.setEnemy(another);
         one.setGame(this);
         one.generateCardIdInGame(this);
@@ -31,38 +44,38 @@ public class Game {
 
         boolean first = random.nextBoolean();
         if (first) {
-            this.campFirst = one;
-            this.campSecond = another;
+            this.first = one;
+            this.secoond = another;
         } else {
-            this.campFirst = another;
-            this.campSecond = one;
+            this.first = another;
+            this.secoond = one;
         }
     }
 
-    private Camp campFirst;
-    private Camp campSecond;
+    private Player first;
+    private Player secoond;
 
     public void start() {
         logger.debug("game start");
-        campFirst.ready(true);
-        campSecond.ready(false);
+        first.ready(true);
+        secoond.ready(false);
         gameStateUpdate();
-        broadCast(GameEventType.START);
-        campFirst.startTurn();
+        broadCast(CommunicateType.START);
+        first.startTurn();
     }
 
-    private void broadCast(GameEventType start) {
+    private void broadCast(CommunicateType start) {
         broadCast(start, null);
     }
 
-    public void broadCast(GameEventType type, Object result) {
-        campFirst.broadCast(type, result);
-        campSecond.broadCast(type, result);
+    public void broadCast(CommunicateType type, Object result) {
+        first.broadCast(type, result);
+        secoond.broadCast(type, result);
     }
 
     public void gameStateUpdate() {
-        campFirst.gameStateUpdate();
-        campSecond.gameStateUpdate();
+        first.gameStateUpdate();
+        secoond.gameStateUpdate();
     }
 
     public void end() {

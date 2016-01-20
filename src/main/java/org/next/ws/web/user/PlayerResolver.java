@@ -24,11 +24,11 @@ public class PlayerResolver implements ParameterResolver {
     @Override
     public Object resolve(Parameter parameter, Map<String, Object> params, SockJSSocket sockJSSocket, String paramName) throws CardUnUsableException {
         User user = userRepository.getUser(sockJSSocket);
-        if (user.getPlayer() == null || user.getPlayer().getCamp() == null) {
+        if (user.getPlayer() == null) {
             user.sendMessage("게임에 참여하지 않았습니다.");
             throw new CardUnUsableException("게임에 참여하지 않았습니다.");
         }
-        if (!user.getPlayer().getCamp().isTurn()) {
+        if (!user.getPlayer().isTurn()) {
             user.sendMessage("상대방의 턴입니다.");
             throw new CardUnUsableException("상대방의 턴입니다.");
         }

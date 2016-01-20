@@ -2,7 +2,7 @@ package org.next.ws.core.action;
 
 import org.next.ws.core.card.exception.CardUnUsableException;
 import org.next.ws.core.fighter.Fighter;
-import org.next.ws.core.game.camp.Camp;
+import org.next.ws.core.game.player.Player;
 
 import java.util.List;
 
@@ -20,9 +20,9 @@ import java.util.List;
 * */
 
 public interface Action {
-    void ableCheck(Camp camp, List<Fighter> targetList) throws CardUnUsableException;
+    boolean able(Player player, List<Fighter> targetList) throws CardUnUsableException;
 
-    void act(Camp camp, List<Fighter> targetList);
+    void act(Player player, List<Fighter> targetList);
 
 
     static Action getAction(String key) {

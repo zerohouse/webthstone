@@ -6,7 +6,6 @@ import org.next.ws.core.StaticValues;
 import org.next.ws.core.card.Card;
 import org.next.ws.core.card.CardDto;
 import org.next.ws.core.card.exception.CardNotExistException;
-import org.next.ws.core.game.camp.Camp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +23,7 @@ public class Hand {
     private int burnedSize;
     private List<Card> cards;
 
-    public Hand(Camp camp) {
+    public Hand() {
         this.maxSize = StaticValues.DEFAULT_HAND_MAX_SIZE;
         cards = new ArrayList<>();
         burnedSize = 0;

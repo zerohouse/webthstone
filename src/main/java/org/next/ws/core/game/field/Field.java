@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class Field {
 
     private int fieldMax;
-    List<Fighter> fighters;
+    List<FieldFighter> fighters;
 
     public Field() {
         fieldMax = StaticValues.DEFAULT_FIELD_MAX_SIZE;
@@ -27,7 +27,7 @@ public class Field {
         return this.fighters.size() + 1 < fieldMax;
     }
 
-    public void addFighter(Fighter fighter) {
+    public void addFighter(FieldFighter fighter) {
         this.fighters.add(fighter);
     }
 

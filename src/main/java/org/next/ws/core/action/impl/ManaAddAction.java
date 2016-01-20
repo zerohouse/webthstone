@@ -2,7 +2,7 @@ package org.next.ws.core.action.impl;
 
 import org.next.ws.core.action.AmountAction;
 import org.next.ws.core.fighter.Fighter;
-import org.next.ws.core.game.camp.Camp;
+import org.next.ws.core.game.player.Player;
 
 import java.util.List;
 
@@ -13,11 +13,12 @@ public class ManaAddAction extends AmountAction {
     }
 
     @Override
-    public void ableCheck(Camp camp, List<Fighter> targetList) {
+    public boolean able(Player player, List<Fighter> targetList) {
+        return  true;
     }
 
     @Override
-    public void act(Camp camp, List<Fighter> targetList) {
-        camp.getPlayingPlayer().getGameHero().getMana().add(amount.getValue());
+    public void act(Player player, List<Fighter> targetList) {
+        player.getGameHero().getMana().add(amount.getValue());
     }
 }

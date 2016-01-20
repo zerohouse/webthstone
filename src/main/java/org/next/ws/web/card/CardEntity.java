@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Type;
 import org.next.ws.core.card.CardTemplate;
-import org.next.ws.core.fighter.FighterTemplate;
 import org.next.ws.web.fighter.FighterEntity;
 
 import javax.persistence.*;
