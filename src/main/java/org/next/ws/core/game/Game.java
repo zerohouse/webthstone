@@ -3,7 +3,6 @@ package org.next.ws.core.game;
 import lombok.Getter;
 import lombok.ToString;
 import org.next.ws.core.action.NonTargetAction;
-import org.next.ws.core.event.standard.CommunicateType;
 import org.next.ws.core.game.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +24,9 @@ public class Game {
         random = new Random();
     }
 
-    public final Map<GameEventType, List<NonTargetAction>> events = new HashMap<>();
+    public final Map<GameEvent, List<NonTargetAction>> events = new HashMap<>();
 
-    public void eventOccur(GameEventType type, Player trigger) {
+    public void eventOccur(GameEvent type, Player trigger) {
         events.get(type).forEach(nonTargetAction -> {
             if (nonTargetAction.able(trigger))
                 nonTargetAction.act(trigger);
@@ -60,15 +59,15 @@ public class Game {
         first.ready(true);
         secoond.ready(false);
         gameStateUpdate();
-        broadCast(CommunicateType.START);
+        broadCast(GameEvent.START);
         first.startTurn();
     }
 
-    private void broadCast(CommunicateType start) {
+    private void broadCast(GameEvent start) {
         broadCast(start, null);
     }
 
-    public void broadCast(CommunicateType type, Object result) {
+    public void broadCast(GameEvent type, Object result) {
         first.broadCast(type, result);
         secoond.broadCast(type, result);
     }

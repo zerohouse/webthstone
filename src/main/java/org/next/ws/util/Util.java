@@ -8,7 +8,6 @@ import java.util.TimerTask;
 public class Util {
     public static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
-
     public static Timer setTimeout(Runnable runnable, int timeout) {
         Timer timer = new Timer();
         timer.schedule(

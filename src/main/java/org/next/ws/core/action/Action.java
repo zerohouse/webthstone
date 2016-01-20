@@ -24,16 +24,15 @@ public interface Action {
 
     void act(Player player, List<Fighter> targetList);
 
-
-    static Action getAction(String key) {
-        return ActionBuilder.getAction(key);
-    }
-
-    static NonTargetAction getNontargetAction(String deathAction) {
+    static NonTargetAction getNonTargetAction(String deathAction) {
         return null;
     }
 
     static List<NonTargetAction> getNonTargetActionList(String deathAction) {
+        return null;
+    }
+
+    static Action getAction(String actionString) {
         return null;
     }
 }

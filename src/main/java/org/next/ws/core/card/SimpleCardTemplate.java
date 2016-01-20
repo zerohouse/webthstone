@@ -1,6 +1,7 @@
 package org.next.ws.core.card;
 
 import lombok.Getter;
+import org.next.ws.core.action.Action;
 import org.next.ws.core.fighter.FighterTemplate;
 import org.next.ws.core.fighter.SimpleFighterTemplate;
 

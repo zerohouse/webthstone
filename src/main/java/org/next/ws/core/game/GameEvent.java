@@ -1,0 +1,5 @@
+package org.next.ws.core.game;
+
+public enum GameEvent {
+    START, PLAYER_UPDATE, ENEMY_UPDATE, START_TURN, END_TURN, ENEMY_TURN, WARN, WIN, LOSE, USE_CARD, ENEMY_USE_CARD, ATTACK, CARD_DECK_NULL, DRAW_CARD;
+}

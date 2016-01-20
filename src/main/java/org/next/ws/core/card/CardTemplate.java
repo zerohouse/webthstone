@@ -17,4 +17,6 @@ public interface CardTemplate {
     boolean isFighter();
 
     FighterTemplate getFighterTemplate();
+
+
 }

@@ -100,6 +100,16 @@
             <version>4.2.3.RELEASE</version>
             <scope>test</scope>
         </dependency>
+
+        <!--for core -->
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections-maven</artifactId>
+            <version>0.9.9-RC2</version>
+        </dependency>
+        <!-- end core -->
+
+
     </dependencies>
 
     <build>

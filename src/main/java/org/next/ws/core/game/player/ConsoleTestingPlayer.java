@@ -1,6 +1,6 @@
 package org.next.ws.core.game.player;
 
-import org.next.ws.core.event.standard.CommunicateType;
+import org.next.ws.core.game.GameEvent;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.hero.Hero;
 import org.slf4j.Logger;
@@ -17,7 +17,7 @@ public class ConsoleTestingPlayer extends Player {
     }
 
     @Override
-    public void broadCast(CommunicateType type, Object result) {
+    public void broadCast(GameEvent type, Object result) {
         logger.debug(type.toString() + result);
     }
 }

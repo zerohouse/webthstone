@@ -1,6 +1,6 @@
 package org.next.ws.web.matching;
 
-import org.next.ws.core.event.standard.CommunicateType;
+import org.next.ws.core.game.GameEvent;
 import org.next.ws.core.game.player.Player;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.hero.Hero;
@@ -17,7 +17,7 @@ public class SocketUserPlayer extends Player {
     }
 
     @Override
-    public void broadCast(CommunicateType type, Object result) {
+    public void broadCast(GameEvent type, Object result) {
         Jeo.event(user.getSockJSSocket(), prefix + type.toString().toLowerCase(), result);
     }
 }
