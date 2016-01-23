@@ -6,14 +6,13 @@ import lombok.ToString;
 import org.next.ws.core.fighter.property.AttackPower;
 import org.next.ws.core.fighter.property.MagicPower;
 import org.next.ws.core.fighter.property.Vital;
-import org.next.ws.core.game.Game;
 import org.next.ws.core.hero.prop.ability.Ability;
 
 @Getter
 @ToString
 public abstract class AbstractHero implements Hero {
 
-    public AbstractHero(String name, String img, Ability ability, Game game) {
+    public AbstractHero(String name, String img, Ability ability) {
         this.name = name;
         this.img = img;
         this.ability = ability;

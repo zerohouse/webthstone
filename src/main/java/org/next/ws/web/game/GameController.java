@@ -1,7 +1,5 @@
 package org.next.ws.web.game;
 
-import org.next.ws.core.fighter.Fighter;
-import org.next.ws.core.game.GameEvent;
 import org.next.ws.core.game.player.Player;
 import org.next.ws.jeo.JeoController;
 import org.next.ws.jeo.JeoEvent;
@@ -27,10 +25,6 @@ public class GameController {
 
     @JeoEvent("game.fighter_attack")
     public void attack(Player player, Integer by, Integer target){
-        Fighter attacker = player.getFighterById(by);
-        Fighter defender = player.getFighterById(target);
-        attacker.attack(defender);
-        player.getGame().gameStateUpdate();
-        player.getGame().broadCast(GameEvent.ATTACK, "공격 : " + attacker.getName() + " -> " + defender.getName());
+        player.attack(by, target);
     }
 }

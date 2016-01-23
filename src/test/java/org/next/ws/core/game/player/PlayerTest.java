@@ -2,8 +2,6 @@ package org.next.ws.core.game.player;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.next.ws.core.game.player.deck.Deck;
-import org.next.ws.core.hero.healer.Healer;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,7 +11,6 @@ public class PlayerTest {
 
     @Before
     public void setUp() throws Exception {
-        player = new ConsoleTestingPlayer(new Healer("사제", "/resource/icon/coin.img", null), new Deck("[1,2,3,4,5,1,2,3,4,5,1,2,3]"));
     }
 
 

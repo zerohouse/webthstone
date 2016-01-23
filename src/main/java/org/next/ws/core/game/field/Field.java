@@ -6,6 +6,7 @@ import org.next.ws.core.StaticValues;
 import org.next.ws.core.fighter.FieldFighter;
 import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.fighter.FighterDto;
+import org.next.ws.core.game.event.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,5 +46,11 @@ public class Field {
 
     public void removeFighter(FieldFighter fieldFighter) {
         fighters.remove(fieldFighter);
+    }
+
+    public void broadCast(Event event) {
+        fighters.forEach(fieldFighter -> {
+            fieldFighter.broadCast(event);
+        });
     }
 }

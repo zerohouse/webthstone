@@ -1,7 +1,9 @@
 package org.next.ws.web.card;
 
-import org.next.ws.web.repository.CardEntityRepository;
+import org.next.ws.core.action.serialize.WsActionProperties;
+import org.next.ws.core.scanner.ComponentScanner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,17 +19,21 @@ public class CardController {
     CardDao cardDao;
 
     @Autowired
-    CardEntityRepository cardEntityRepository;
+    CardService cardService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<CardEntity> getCardList(Map<String, Object> params) {
+    public List<CardEntityDto> getCardList(Map<String, Object> params) {
         return cardDao.getList(params);
     }
 
+    @RequestMapping(value = "/effect", method = RequestMethod.GET)
+    public Map<String, WsActionProperties> getEffectList() {
+        return ComponentScanner.getActionInfo();
+    }
+
     @RequestMapping(method = RequestMethod.POST)
-    public Long saveCard(CardEntity card) {
-        cardEntityRepository.save(card);
-        return card.getId();
+    public Long saveCard(@RequestBody CardParameterDto cardParameterDto) {
+        return cardService.save(cardParameterDto);
     }
 
 }

@@ -1,5 +1,9 @@
 package org.next.ws.core.fighter;
 
+import org.next.ws.core.action.serialize.ActionTemplate;
+
+import java.util.List;
+
 public interface FighterTemplate {
     String getName();
 
@@ -9,13 +13,5 @@ public interface FighterTemplate {
 
     Integer getAttack();
 
-    String getDeathAction();
-
-    String getTurnStartAction();
-
-    String getTurnEndAction();
-
-    String getAttackAction();
-
-    String getHeatedAction();
+    List<ActionTemplate> getActionList();
 }

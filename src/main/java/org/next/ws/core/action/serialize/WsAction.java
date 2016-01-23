@@ -1,6 +1,9 @@
 package org.next.ws.core.action.serialize;
 
 
+import org.next.ws.core.action.target.TargetOption;
+import org.next.ws.core.action.target.TargetResolve;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,4 +18,10 @@ public @interface WsAction {
     String name();
 
     String[] params() default {};
+
+    TargetResolve[] target() default {};
+
+    TargetOption targetOption() default TargetOption.NONE;
+
+    boolean targetNeed() default false;
 }

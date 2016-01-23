@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.next.ws.core.StaticValues;
-import org.next.ws.core.action.NonTargetAction;
 import org.next.ws.core.card.Card;
 import org.next.ws.core.card.StaticCardTemplate;
 import org.next.ws.core.card.exception.CardNotExistException;
@@ -14,18 +13,21 @@ import org.next.ws.core.card.property.Cost;
 import org.next.ws.core.fighter.FieldFighter;
 import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.Game;
-import org.next.ws.core.game.GameEvent;
+import org.next.ws.core.game.event.Event;
+import org.next.ws.core.game.event.EventInfo;
+import org.next.ws.core.game.event.EventType;
 import org.next.ws.core.game.field.Field;
 import org.next.ws.core.game.player.deck.Deck;
 import org.next.ws.core.game.player.hand.Hand;
 import org.next.ws.core.game.player.hero.HeroFighter;
 import org.next.ws.core.game.player.secret.Secret;
-import org.next.ws.core.hero.Hero;
 import org.next.ws.util.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
 
 
 @ToString(exclude = "enemy")
@@ -33,10 +35,8 @@ import java.util.*;
 @Setter
 public abstract class Player {
 
-    public Player(Hero hero, Deck deck) {
-        this.gameHero = new HeroFighter(hero);
+    public Player() {
         this.secret = new ArrayList<>();
-        this.deck = deck;
         this.hand = new Hand();
         this.field = new Field();
         this.nullDeckCount = 0;
@@ -48,49 +48,28 @@ public abstract class Player {
     protected boolean turn;
     protected Timer timer;
 
-    protected final Deck deck;
+    protected Deck deck;
+    protected HeroFighter gameHero;
     protected final Hand hand;
-    protected final HeroFighter gameHero;
     protected Player enemy;
-
-    protected Map<GameEvent, List<NonTargetAction>> events = new HashMap<>();
 
     protected final List<Secret> secret;
     protected int nullDeckCount;
 
-    public void executeEvent(GameEvent event) {
-        if (events.get(event) == null)
-            return;
-        events.get(event).forEach(e -> {
-            e.act(this);
-        });
-    }
-
-    public void bind(GameEvent event, NonTargetAction action) {
-        if (events.get(event) == null)
-            events.put(event, new ArrayList<>());
-        events.get(event).add(action);
-    }
-
-    public void unbind(GameEvent event, NonTargetAction action) {
-        if (events.get(event) == null)
-            return;
-        events.get(event).remove(action);
-    }
 
     public void useCard(Integer id, List<Fighter> targetList) {
         try {
             Card card = this.hand.pickCard(id);
             card.use(this, targetList);
-            enemy.broadCast(GameEvent.ENEMY_USE_CARD, card.getName());
-            broadCast(GameEvent.USE_CARD, card.getName());
+            enemy.broadCast(EventType.ENEMY_USE_CARD, card.getName());
+            broadCast(EventType.USE_CARD, card.getName());
             logger.debug("카드사용 {}", card);
         } catch (CardNotExistException e) {
             logger.debug("카드불가 사용 불가");
-            broadCast(GameEvent.WARN, "잘못된 접근입니다. 손에 없는 카드를 쓰려고 했습니다.");
+            broadCast(EventType.WARN, "잘못된 접근입니다. 손에 없는 카드를 쓰려고 했습니다.");
         } catch (CardUnUsableException e) {
             logger.debug("카드불가 사용 불가 {}", e.getMessage());
-            broadCast(GameEvent.WARN, e.getMessage());
+            broadCast(EventType.WARN, e.getMessage());
         }
     }
 
@@ -103,7 +82,6 @@ public abstract class Player {
     private void drawCard() {
         Card card = deck.drawCard();
         if (card != null) {
-            executeEvent(GameEvent.DRAW_CARD);
             hand.addCard(card);
             return;
         }
@@ -113,7 +91,7 @@ public abstract class Player {
     public void nullCardEvent() {
         nullDeckCount++;
         gameHero.addVital(-nullDeckCount);
-        broadCast(GameEvent.CARD_DECK_NULL, nullDeckCount);
+        sendToClient(new Event(EventType.CARD_DECK_NULL, new EventInfo(nullDeckCount)));
         logger.debug("player deck empty - count:{}", nullDeckCount);
     }
 
@@ -125,11 +103,7 @@ public abstract class Player {
         return gameHero.getMana().isEnough(cost.getCost());
     }
 
-    public abstract void broadCast(GameEvent type, Object result);
-
-    public void broadCast(GameEvent type) {
-        broadCast(type, null);
-    }
+    public abstract void sendToClient(Event event);
 
     public boolean addAble() {
         return field.addAble();
@@ -153,11 +127,11 @@ public abstract class Player {
     }
 
     public void win() {
-        broadCast(GameEvent.WIN);
+        broadCast(EventType.WIN);
     }
 
     public void lose() {
-        broadCast(GameEvent.LOSE);
+        broadCast(EventType.LOSE);
         enemy.win();
         game.end();
     }
@@ -185,13 +159,12 @@ public abstract class Player {
 
     public void startTurn() {
         logger.debug("{} 턴을 시작합니다.", gameHero.getName());
-        executeEvent(GameEvent.START_TURN);
         gameHero.startTurn();
         field.startTurn();
         drawCard(1);
         this.turn = true;
-        broadCast(GameEvent.START_TURN);
-        enemy.broadCast(GameEvent.ENEMY_TURN);
+        broadCast(EventType.START_TURN);
+        enemy.broadCast(EventType.ENEMY_TURN);
         gameStateUpdate();
 
         timer = Util.setTimeout(() -> {
@@ -204,17 +177,28 @@ public abstract class Player {
             return;
         timer.cancel();
         logger.debug("{} 턴을 마칩니다.", gameHero.getName());
-        executeEvent(GameEvent.END_TURN);
         this.turn = false;
         field.endTurn();
         this.enemy.startTurn();
-        broadCast(GameEvent.END_TURN);
+        sendToClient(new Event(EventType.END_TURN));
         gameStateUpdate();
     }
 
+    public void broadCast(EventType type) {
+        Event event = new Event(type);
+        field.broadCast(event);
+        sendToClient(event);
+    }
+
+    public void broadCast(EventType type, Object obj) {
+        Event event = new Event(type, new EventInfo(obj));
+        field.broadCast(event);
+        sendToClient(event);
+    }
+
     public void gameStateUpdate() {
-        broadCast(GameEvent.PLAYER_UPDATE, new PlayerDto(this));
-        broadCast(GameEvent.ENEMY_UPDATE, new EnemyPlayerDto(enemy));
+        broadCast(EventType.PLAYER_UPDATE, new PlayerDto(this));
+        broadCast(EventType.ENEMY_UPDATE, new EnemyPlayerDto(enemy));
     }
 
 
@@ -252,5 +236,13 @@ public abstract class Player {
         result.add(gameHero);
         result.add(enemy.gameHero);
         return result;
+    }
+
+    public void attack(Integer by, Integer target) {
+        Fighter attacker = getFighterById(by);
+        Fighter defender = getFighterById(target);
+        attacker.attack(defender);
+        broadCast(EventType.ATTACK, "공격 : " + attacker.getName() + " -> " + defender.getName());
+        getGame().gameStateUpdate();
     }
 }

@@ -4,6 +4,7 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.path.EntityPathBase;
 import com.mysema.query.types.path.NumberPath;
 import com.mysema.query.types.path.StringPath;
+import org.next.ws.core.StaticValues;
 
 import java.util.Map;
 
@@ -14,15 +15,20 @@ public class QueryingUtil {
     public static final String BIGGER_EQUAL = ">=";
     public static final String SMALLER = "<";
     public static final String SMALLER_EQUAL = "<=";
+    public static final String PAGE = "page";
 
     public static JPAQuery mapQuery(JPAQuery query, EntityPathBase pathBase, Map<String, Object> params) {
-        query = query.from(pathBase);
+        query = query.from(pathBase).limit(StaticValues.DEFAULT_PAGE_SIZE);
         if (params == null)
             return query;
         for (Map.Entry<String, Object> entry : params.entrySet()) {
             try {
                 if (entry.getValue() == null)
                     continue;
+                if (entry.getKey().equals(PAGE)) {
+                    query.offset(Long.parseLong(entry.getValue().toString()) * StaticValues.DEFAULT_PAGE_SIZE);
+                    continue;
+                }
                 Class<?> valClazz = entry.getValue().getClass();
                 query = getProcessEntry(query, pathBase, entry, valClazz);
             } catch (IllegalAccessException | NoSuchFieldException e) {

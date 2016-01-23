@@ -2,14 +2,15 @@ package org.next.ws.core.card;
 
 import lombok.Getter;
 import lombok.ToString;
-import org.next.ws.core.StaticValues;
 import org.next.ws.core.action.Action;
 import org.next.ws.core.card.exception.CardUnUsableException;
 import org.next.ws.core.card.property.Cost;
 import org.next.ws.core.fighter.FieldFighter;
 import org.next.ws.core.fighter.Fighter;
+import org.next.ws.core.fighter.FighterTemplate;
 import org.next.ws.core.game.Game;
 import org.next.ws.core.game.player.Player;
+import org.next.ws.core.scanner.ComponentScanner;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Card {
     Cost cost;
     String name;
     Action useAction;
-    FieldFighter fighter;
+    FighterTemplate fighterTemplate;
     String desc;
     String img;
     Integer cardIdInGame;
@@ -29,10 +30,10 @@ public class Card {
         this.name = cardTemplate.getName();
         this.desc = cardTemplate.getDesc();
         this.img = cardTemplate.getImg();
-        useAction = Action.getAction(cardTemplate.getActionString());
+        useAction = ComponentScanner.getAction(cardTemplate.getUseActionTemplate());
 
-        if (cardTemplate.isFighter())
-            this.fighter = new FieldFighter(cardTemplate.getFighterTemplate());
+        if (cardTemplate.isFighterCard())
+            this.fighterTemplate = cardTemplate.getFighterTemplate();
     }
 
     private void usableCheck(Player player, List<Fighter> targetList) throws CardUnUsableException {
@@ -48,10 +49,8 @@ public class Card {
         usableCheck(player, targetList);
         if (useAction != null)
             useAction.act(player, targetList);
-        if (this.fighter != null) {
-            fighter.setPlayer(player);
-            fighter.getAttackPower().setCount(StaticValues.DEFAULT_ATTACK_COUNT_WHEN_PLAYED);
-            player.addFighter(fighter);
+        if (this.fighterTemplate != null) {
+            player.addFighter(new FieldFighter(fighterTemplate, player));
         }
         player.useMana(cost);
 
@@ -64,7 +63,5 @@ public class Card {
         if (game == null)
             return;
         cardIdInGame = game.getNextId();
-        if (this.fighter != null)
-            fighter.setId(game.getNextId());
     }
 }

@@ -8,4 +8,6 @@ public class StaticValues {
     public static final int MY_GAME_HERO_ID = 0;
     public static final int ENEMY_GAME_HERO_ID = 1;
     public static final int DEFAULT_ATTACK_COUNT_WHEN_PLAYED = 0;
+    public static final long DEFAULT_PAGE_SIZE = 10;
+    public static final String DELIMITER = ",";
 }

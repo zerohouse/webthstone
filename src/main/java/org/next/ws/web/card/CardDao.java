@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Dao
 public class CardDao {
@@ -18,9 +19,9 @@ public class CardDao {
 
     private QCardEntity qCardEntity = QCardEntity.cardEntity;
 
-    public List<CardEntity> getList(Map<String, Object> params) {
+    public List<CardEntityDto> getList(Map<String, Object> params) {
         JPAQuery query = new JPAQuery(entityManager);
         query = QueryingUtil.mapQuery(query, qCardEntity, params);
-        return query.list(qCardEntity);
+        return query.list(qCardEntity).stream().map(CardEntityDto::new).collect(Collectors.toList());
     }
 }

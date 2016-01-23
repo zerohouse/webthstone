@@ -6,7 +6,7 @@ import org.next.ws.core.fighter.property.AttackPower;
 import org.next.ws.core.fighter.property.MagicPower;
 import org.next.ws.core.fighter.property.Species;
 import org.next.ws.core.fighter.property.Vital;
-import org.next.ws.core.game.GameEvent;
+import org.next.ws.core.game.event.EventType;
 import org.next.ws.core.game.player.Player;
 
 @Setter
@@ -45,7 +45,7 @@ public abstract class Fighter {
 
     public void attack(Fighter defender) {
         if (!attackPower.isAttackAble()) {
-            player.broadCast(GameEvent.WARN, "공격 가능한 상태가 아닙니다.");
+            player.broadCast(EventType.WARN, "공격 가능한 상태가 아닙니다.");
             return;
         }
         attackPower.attack();

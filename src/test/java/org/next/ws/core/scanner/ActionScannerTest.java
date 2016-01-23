@@ -1,4 +1,4 @@
-package org.next.ws.core.action.repository;
+package org.next.ws.core.scanner;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Test;
@@ -9,7 +9,10 @@ public class ActionScannerTest {
 
     @Test
     public void test() throws JsonProcessingException {
-        System.out.println(Util.OBJECT_MAPPER.writeValueAsString(ActionUtil.getActionInfo()));
+        System.out.println(Util.OBJECT_MAPPER.writeValueAsString(new ComponentScanner().getActionInfo()));
+    }
+    @Test
+    public void tests() throws JsonProcessingException {
     }
 
 }

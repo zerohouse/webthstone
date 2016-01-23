@@ -5,10 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Type;
+import org.next.ws.core.action.serialize.ActionTemplate;
 import org.next.ws.core.card.CardTemplate;
+import org.next.ws.web.action.ActionEntity;
+import org.next.ws.web.deck.DeckHasCard;
 import org.next.ws.web.fighter.FighterEntity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,9 +21,31 @@ import javax.persistence.*;
 @Entity
 public class CardEntity implements CardTemplate {
 
-    @ManyToOne
+
+    public CardEntity(CardParameterDto card) {
+        cost = card.getCost();
+        name = card.getName();
+        desc = card.getDesc();
+        img = card.getImg();
+        fighterCard = card.isFighterCard();
+        if(fighterCard){
+            fighterTemplate = new FighterEntity(card.getFighter(), this);
+            return;
+        }
+        actionTemplate = new ActionEntity(card.getEffect());
+    }
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn
     FighterEntity fighterTemplate;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
+    private ActionEntity actionTemplate;
+
+    @OneToMany(mappedBy = "card")
+    private List<DeckHasCard> deckHasCardList;
 
     @Id
     @Column
@@ -40,10 +66,10 @@ public class CardEntity implements CardTemplate {
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     @Column
-    private boolean fighter;
+    private boolean fighterCard;
 
-    @Column
-    private String actionString;
-
-
+    @Override
+    public ActionTemplate getUseActionTemplate() {
+        return actionTemplate;
+    }
 }

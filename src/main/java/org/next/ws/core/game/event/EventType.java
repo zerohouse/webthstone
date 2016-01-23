@@ -1,0 +1,7 @@
+package org.next.ws.core.game.event;
+
+public enum EventType {
+    START, PLAYER_UPDATE, ENEMY_UPDATE, ENEMY_TURN, WARN, WIN, LOSE, USE_CARD, ENEMY_USE_CARD,
+    START_TURN, END_TURN, ATTACK, CARD_DECK_NULL, DRAW_CARD, TEAM_DIE, TEAM_BIRTH, ENEMY_DIE, ENEMY_BIRTH, //플레이어 이벤트
+    DIE, BIRTH ; // 하수인 이벤트
+}

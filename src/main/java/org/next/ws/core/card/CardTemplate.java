@@ -1,5 +1,6 @@
 package org.next.ws.core.card;
 
+import org.next.ws.core.action.serialize.ActionTemplate;
 import org.next.ws.core.fighter.FighterTemplate;
 
 public interface CardTemplate {
@@ -12,11 +13,10 @@ public interface CardTemplate {
 
     String getDesc();
 
-    String getActionString();
-
-    boolean isFighter();
+    boolean isFighterCard();
 
     FighterTemplate getFighterTemplate();
 
+    ActionTemplate getUseActionTemplate();
 
 }

@@ -1,6 +1,9 @@
 package org.next.ws.core.fighter;
 
 import lombok.Getter;
+import org.next.ws.core.action.serialize.ActionTemplate;
+
+import java.util.List;
 
 @Getter
 public class SimpleFighterTemplate implements FighterTemplate {
@@ -19,27 +22,7 @@ public class SimpleFighterTemplate implements FighterTemplate {
     }
 
     @Override
-    public String getDeathAction() {
-        return null;
-    }
-
-    @Override
-    public String getTurnStartAction() {
-        return null;
-    }
-
-    @Override
-    public String getTurnEndAction() {
-        return null;
-    }
-
-    @Override
-    public String getAttackAction() {
-        return null;
-    }
-
-    @Override
-    public String getHeatedAction() {
+    public List<ActionTemplate> getActionList() {
         return null;
     }
 }
