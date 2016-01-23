@@ -3,12 +3,6 @@ package org.next.ws.web.action;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.next.ws.web.card.CardEntity;
-import org.next.ws.web.fighter.FighterHasAction;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter

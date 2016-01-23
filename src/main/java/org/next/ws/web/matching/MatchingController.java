@@ -22,7 +22,7 @@ public class MatchingController {
 
     @JeoEvent(value = "game.play", eventDest = "message")
     public String gamePlay(User user, String heroType, Long deckId) {
-        if (user.getId() == null)
+        if (user.getFbId() == null)
             return "로그인이 필요한 서비스입니다.";
         DeckEntity deckEntity = deckEntityRepository.findOne(deckId);
         List<Card> cardList = deckEntity.getCardList();

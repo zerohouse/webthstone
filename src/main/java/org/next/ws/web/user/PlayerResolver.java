@@ -14,7 +14,7 @@ import java.util.Map;
 public class PlayerResolver implements ParameterResolver {
 
     @Autowired
-    UserRepository userRepository;
+    UserMap userRepository;
 
     @Override
     public boolean isAcceptable(Parameter parameter, Map<String, Object> params, SockJSSocket sockJSSocket, String paramName) {

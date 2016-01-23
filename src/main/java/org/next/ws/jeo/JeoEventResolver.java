@@ -53,6 +53,7 @@ public class JeoEventResolver {
         parameterResolvers = new ArrayList<>();
         parameterResolvers.add(new DefaultNameResolver());
         parameterResolvers.add(new DefaultMapResolver());
+        parameterResolvers.add(new SockJSSocketResolver());
         parameterResolvers.add(new JsonParseResolver());
 
         Map map = applicationContext.getBeansWithAnnotation(JeoParameterResolver.class);

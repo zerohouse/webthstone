@@ -3,15 +3,9 @@ package org.next.ws.web.card;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
-import org.next.ws.web.action.ActionEntity;
 import org.next.ws.web.action.ActionEntityDto;
 import org.next.ws.web.deck.DeckHasCard;
-import org.next.ws.web.fighter.FighterEntity;
 import org.next.ws.web.fighter.FighterEntityDto;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -24,6 +18,8 @@ public class CardEntityDto {
 
     private Long id;
 
+    private Long deckHasCardId;
+
     private Integer cost;
 
     private String img;
@@ -33,6 +29,12 @@ public class CardEntityDto {
     private String desc;
 
     private boolean fighterCard;
+
+
+    public CardEntityDto(DeckHasCard deckHasCard) {
+        this(deckHasCard.getCard());
+        this.deckHasCardId = deckHasCard.getId();
+    }
 
     public CardEntityDto(CardEntity cardEntity) {
         this.id = cardEntity.getId();
@@ -45,6 +47,5 @@ public class CardEntityDto {
             this.fighter = new FighterEntityDto(cardEntity.getFighterTemplate());
         if (cardEntity.getActionTemplate() != null)
             this.action = new ActionEntityDto(cardEntity.getActionTemplate());
-
     }
 }

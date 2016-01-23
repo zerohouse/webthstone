@@ -12,7 +12,7 @@ import java.util.Map;
 public class UserResolver implements ParameterResolver {
 
     @Autowired
-    UserRepository userRepository;
+    UserMap userMap;
 
     @Override
     public boolean isAcceptable(Parameter parameter, Map<String, Object> params, SockJSSocket sockJSSocket, String paramName) {
@@ -21,7 +21,7 @@ public class UserResolver implements ParameterResolver {
 
     @Override
     public Object resolve(Parameter parameter, Map<String, Object> params, SockJSSocket sockJSSocket, String paramName) {
-        return userRepository.getUser(sockJSSocket);
+        return userMap.getUser(sockJSSocket);
     }
 
 }

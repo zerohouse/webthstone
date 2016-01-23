@@ -21,7 +21,7 @@ public class Deck {
 //    public void validate(Integer size, Integer sameCardLimit) {
 //        if (!size.equals(countCard()))
 //            throw new CardSizeNotMatched();
-//        if (cards.stream().filter(id -> Collections.frequency(cards, id) > sameCardLimit).findAny().isPresent())
+//        if (cards.stream().filter(fbId -> Collections.frequency(cards, fbId) > sameCardLimit).findAny().isPresent())
 //            throw new SameCardLimitViolation();
 //    }
 

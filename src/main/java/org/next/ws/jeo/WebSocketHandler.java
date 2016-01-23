@@ -2,7 +2,7 @@ package org.next.ws.jeo;
 
 import io.vertx.core.Handler;
 import io.vertx.ext.web.handler.sockjs.SockJSSocket;
-import org.next.ws.web.user.UserRepository;
+import org.next.ws.web.user.UserMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class WebSocketHandler implements Handler<SockJSSocket> {
     private static final Logger logger = LoggerFactory.getLogger(WebSocketHandler.class);
 
     @Autowired
-    UserRepository userRepository;
+    UserMap userRepository;
 
     @Autowired
     JeoEventResolver jeoEventResolver;
