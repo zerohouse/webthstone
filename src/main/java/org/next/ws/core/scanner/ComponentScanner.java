@@ -45,12 +45,11 @@ public class ComponentScanner {
     public static Action getAction(ActionTemplate actionTemplate) {
         if (actionTemplate == null)
             return null;
+        if (actionTemplate.getTemplateId() == null)
+            return null;
         try {
             Class<?>[] parameterTypes = constructorMap.get(actionTemplate.getTemplateId()).getParameterTypes();
             Object[] params = actionTemplate.getParams();
-            for (int i = 0; i < parameterTypes.length; i++) {
-                params[i] = parameterTypes[i].cast(params[i]);
-            }
             return (Action) constructorMap.get(actionTemplate.getTemplateId()).newInstance(actionTemplate.getParams());
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();

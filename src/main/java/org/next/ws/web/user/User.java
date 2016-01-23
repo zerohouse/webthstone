@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(exclude = {"sockJSSocket", "player"})
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "fbId"))
 public class User {

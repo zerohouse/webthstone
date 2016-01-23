@@ -115,7 +115,7 @@ public class JeoEventResolver {
         private Object getParameter(Parameter parameter, Map<String, Object> params, SockJSSocket sockJSSocket, String paramName) throws Exception {
             for (ParameterResolver parameterResolver : parameterResolvers) {
                 if (parameterResolver.isAcceptable(parameter, params, sockJSSocket, paramName))
-                    return parameterResolver.resolve(parameter, params, sockJSSocket, paramName);
+                    return parameter.getType().cast(parameterResolver.resolve(parameter, params, sockJSSocket, paramName));
             }
             return null;
         }

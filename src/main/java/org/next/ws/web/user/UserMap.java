@@ -48,7 +48,8 @@ public class UserMap {
         } else {
             userRepository.save(user);
         }
-        user.setFbId(id);
+        if (id != null)
+            user.setFbId(id);
         if (name != null)
             user.setName(name);
         if (img != null)

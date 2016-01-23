@@ -17,7 +17,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/deck")
-@Transactional
 public class DeckController {
 
 

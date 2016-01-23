@@ -10,7 +10,6 @@ import java.util.Random;
 import java.util.Stack;
 
 @Getter
-@ToString
 public class Deck {
     private Stack<Card> cards = new Stack<>();;
 

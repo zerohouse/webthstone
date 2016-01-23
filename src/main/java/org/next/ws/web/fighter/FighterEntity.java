@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @Entity
 public class FighterEntity implements FighterTemplate {
 
@@ -36,7 +35,7 @@ public class FighterEntity implements FighterTemplate {
     @OneToMany(mappedBy = "fighterTemplate")
     List<CardEntity> cardEntityList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "fighterEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "fighterEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<FighterHasAction> fighterHasActions = new ArrayList<>();
 
     @Id
