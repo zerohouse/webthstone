@@ -47,9 +47,6 @@ public class User {
     @Transient
     private SocketUserPlayer player;
 
-    @Transient
-    private Game game;
-
     public User(SockJSSocket sockJSSocket) {
         this.sockJSSocket = sockJSSocket;
     }
@@ -68,4 +65,7 @@ public class User {
         return deckList.stream().map(DeckEntityDto::new).collect(Collectors.toList());
     }
 
+    public boolean inGame() {
+        return player != null && player.getGame() != null;
+    }
 }

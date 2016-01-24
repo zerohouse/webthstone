@@ -43,7 +43,6 @@ public class UserMap {
         if (db != null) {
             db.setPlayer(user.getPlayer());
             db.setSockJSSocket(user.getSockJSSocket());
-            db.setGame(user.getGame());
             user = db;
         } else {
             userRepository.save(user);

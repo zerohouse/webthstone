@@ -17,14 +17,19 @@ public class GameController {
         player.useCard(id, player.resolveTargetList(targetList));
     }
 
-
     @JeoEvent("game.end_turn")
-    public void endTurn(User user){
+    public void endTurn(User user) {
         assureNotNull(user.getPlayer()).endTurn();
     }
 
+    @JeoEvent("game.enter")
+    public void enter(User user) {
+        if (user.inGame())
+            user.getPlayer().getGame().gameStateUpdate();
+    }
+
     @JeoEvent("game.fighter_attack")
-    public void attack(Player player, Integer by, Integer target){
+    public void attack(Player player, Integer by, Integer target) {
         player.attack(by, target);
     }
 }

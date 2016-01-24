@@ -23,7 +23,7 @@ public class MatchingService {
 
 
     public String enqueue(User user) {
-        if (user.getGame() != null)
+        if (user.inGame())
             return "게임에 이미 참여하고 있습니다.";
         if (waitingQue.contains(user))
             return "이미 대기 중입니다.";
