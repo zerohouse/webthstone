@@ -3,7 +3,6 @@ package org.next.ws.web.deck;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.next.ws.core.card.Card;
 import org.next.ws.web.user.User;
 

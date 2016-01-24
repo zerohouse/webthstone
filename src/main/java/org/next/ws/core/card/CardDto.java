@@ -15,6 +15,7 @@ public class CardDto {
     private String img;
     private int id;
     private FighterTemplateDto fighter;
+    private boolean fighterCard;
 
     public CardDto(Card card) {
         this.id = card.cardIdInGame;
@@ -22,6 +23,7 @@ public class CardDto {
         this.name = card.name;
         this.desc = card.desc;
         this.img = card.img;
+        this.fighterCard = card.fighterCard;
         if (card.fighterTemplate == null)
             return;
         this.fighter = new FighterTemplateDto(card.fighterTemplate);

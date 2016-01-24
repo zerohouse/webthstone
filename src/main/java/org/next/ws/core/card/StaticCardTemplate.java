@@ -38,7 +38,7 @@ public class StaticCardTemplate {
 
         @Override
         public ActionTemplate getUseActionTemplate() {
-            return new ActionTemplate() {
+                return new ActionTemplate() {
                 @Override
                 public String getTemplateId() {
                     return "manaadd";
@@ -51,7 +51,7 @@ public class StaticCardTemplate {
 
                 @Override
                 public Object[] getParams() {
-                    return new Object[]{1};
+                    return new Object[]{"1"};
                 }
             };
         }

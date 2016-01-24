@@ -3,10 +3,8 @@ package org.next.ws.web.user;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.next.ws.web.deck.DeckEntity;
 import org.next.ws.web.deck.DeckEntityDto;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Getter

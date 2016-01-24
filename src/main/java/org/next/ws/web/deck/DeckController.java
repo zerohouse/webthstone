@@ -1,19 +1,14 @@
 package org.next.ws.web.deck;
 
-import org.next.ws.jeo.JeoController;
 import org.next.ws.web.card.CardEntity;
 import org.next.ws.web.repository.CardEntityRepository;
 import org.next.ws.web.repository.DeckEntityRepository;
 import org.next.ws.web.repository.DeckHasCardRepository;
 import org.next.ws.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/deck")

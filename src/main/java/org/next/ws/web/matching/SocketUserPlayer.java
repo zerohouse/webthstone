@@ -22,7 +22,7 @@ public class SocketUserPlayer extends Player {
 
     @Override
     public void sendToClient(Event event) {
-        Jeo.event(user.getSockJSSocket(), prefix + event.getType().toString().toLowerCase(), event.getInfo());
+        Jeo.event(user.getSockJSSocket(), prefix + event.getType().toString().toLowerCase(), event.getResult());
     }
 
 }

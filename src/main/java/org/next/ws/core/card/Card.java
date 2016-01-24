@@ -24,15 +24,17 @@ public class Card {
     String desc;
     String img;
     Integer cardIdInGame;
+    boolean fighterCard;
 
     public Card(CardTemplate cardTemplate) {
         this.cost = new Cost(cardTemplate.getCost());
         this.name = cardTemplate.getName();
         this.desc = cardTemplate.getDesc();
         this.img = cardTemplate.getImg();
+        this.fighterCard = cardTemplate.isFighterCard();
         useAction = ComponentScanner.getAction(cardTemplate.getUseActionTemplate());
 
-        if (cardTemplate.isFighterCard())
+        if (fighterCard)
             this.fighterTemplate = cardTemplate.getFighterTemplate();
     }
 

@@ -3,7 +3,6 @@ package org.next.ws.web.fighter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.next.ws.core.action.serialize.ActionTemplate;
 import org.next.ws.core.fighter.FighterTemplate;
 import org.next.ws.web.action.ActionEntity;

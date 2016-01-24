@@ -14,7 +14,6 @@ import org.next.ws.core.fighter.FieldFighter;
 import org.next.ws.core.fighter.Fighter;
 import org.next.ws.core.game.Game;
 import org.next.ws.core.game.event.Event;
-import org.next.ws.core.game.event.EventInfo;
 import org.next.ws.core.game.event.EventType;
 import org.next.ws.core.game.field.Field;
 import org.next.ws.core.game.player.deck.Deck;
@@ -91,7 +90,7 @@ public abstract class Player {
     public void nullCardEvent() {
         nullDeckCount++;
         gameHero.addVital(-nullDeckCount);
-        sendToClient(new Event(EventType.CARD_DECK_NULL, new EventInfo(nullDeckCount)));
+        sendToClient(new Event(EventType.CARD_DECK_NULL, nullDeckCount));
         logger.debug("player deck empty - count:{}", nullDeckCount);
     }
 
@@ -191,7 +190,7 @@ public abstract class Player {
     }
 
     public void broadCast(EventType type, Object obj) {
-        Event event = new Event(type, new EventInfo(obj));
+        Event event = new Event(type, obj);
         field.broadCast(event);
         sendToClient(event);
     }

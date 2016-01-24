@@ -6,14 +6,14 @@ import lombok.Getter;
 public class Event {
 
     private EventType type;
-    private EventInfo info;
+    private Object result;
 
     public Event(EventType type) {
         this.type = type;
     }
 
-    public Event(EventType type, EventInfo info) {
+    public Event(EventType type, Object result) {
         this.type = type;
-        this.info = info;
+        this.result = result;
     }
 }
