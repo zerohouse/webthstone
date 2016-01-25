@@ -3,7 +3,7 @@ package org.next.ws.web.card;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.next.ws.web.ApplicationLauncher;
+import org.next.ws.ApplicationLauncher;
 import org.next.ws.web.repository.CardEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;

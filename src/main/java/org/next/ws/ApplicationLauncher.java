@@ -1,7 +1,8 @@
-package org.next.ws.web;
+package org.next.ws;
 
 
 import io.vertx.core.Vertx;
+import org.next.ws.web.WebSocketServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
