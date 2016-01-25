@@ -1,9 +1,7 @@
 package org.next.ws.core.game.player;
 
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.next.ws.core.StaticValues;
 import org.next.ws.core.card.Card;
 import org.next.ws.core.card.StaticCardTemplate;

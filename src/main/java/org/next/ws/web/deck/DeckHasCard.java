@@ -1,9 +1,6 @@
 package org.next.ws.web.deck;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.next.ws.web.card.CardEntity;
 
 import javax.persistence.*;
