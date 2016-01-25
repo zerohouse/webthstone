@@ -1,7 +1,6 @@
 package org.next.ws.web.card;
 
 import com.mysema.query.jpa.impl.JPAQuery;
-import org.next.ws.entity.card.QCardEntity;
 import org.next.ws.util.QueryingUtil;
 import org.next.ws.web.annotation.Dao;
 

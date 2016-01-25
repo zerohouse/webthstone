@@ -1,8 +1,6 @@
 package org.next.ws.core.action.impl;
 
 import org.junit.Test;
-import org.next.ws.util.Util;
-import org.next.ws.web.card.CardParameterDto;
 
 public class ActionBuilderTest {
 
