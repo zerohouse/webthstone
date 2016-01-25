@@ -8,10 +8,10 @@ import org.next.ws.core.action.serialize.WsActionProperties;
 import org.next.ws.core.game.player.Player;
 import org.next.ws.core.hero.Hero;
 import org.next.ws.core.hero.WsHero;
-//import org.reflections.Reflections;
-//import org.reflections.scanners.MethodAnnotationsScanner;
-//import org.reflections.scanners.SubTypesScanner;
-//import org.reflections.scanners.TypeAnnotationsScanner;
+import org.reflections.Reflections;
+import org.reflections.scanners.MethodAnnotationsScanner;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -28,14 +28,14 @@ public class ComponentScanner {
     private static Map<String, WsActionProperties> InfoMap = new ConcurrentHashMap<>();
 
     static {
-//        Reflections reflections = new Reflections(new MethodAnnotationsScanner(), new SubTypesScanner());
-//        constructorMap = new HashMap<>();
-//        InfoMap = new HashMap<>();
-//        reflections.getConstructorsAnnotatedWith(WsAction.class).forEach(constructor -> {
-//            WsAction wsAction = (WsAction) constructor.getAnnotation(WsAction.class);
-//            constructorMap.put(wsAction.id(), constructor);
-//            InfoMap.put(wsAction.id(), new WsActionProperties(wsAction));
-//        });
+        Reflections reflections = new Reflections(new MethodAnnotationsScanner(), new SubTypesScanner());
+        constructorMap = new HashMap<>();
+        InfoMap = new HashMap<>();
+        reflections.getConstructorsAnnotatedWith(WsAction.class).forEach(constructor -> {
+            WsAction wsAction = (WsAction) constructor.getAnnotation(WsAction.class);
+            constructorMap.put(wsAction.id(), constructor);
+            InfoMap.put(wsAction.id(), new WsActionProperties(wsAction));
+        });
     }
 
     public static Map<String, WsActionProperties> getActionInfo() {
@@ -79,8 +79,8 @@ public class ComponentScanner {
     private static Map<String, Class<?>> heroMap = new ConcurrentHashMap<>();
 
     static {
-//        Reflections reflections = new Reflections(new TypeAnnotationsScanner(), new SubTypesScanner());
-//        reflections.getTypesAnnotatedWith(WsHero.class).forEach(clazz -> heroMap.put(clazz.getAnnotation(WsHero.class).value(), clazz));
+        Reflections reflections = new Reflections(new TypeAnnotationsScanner(), new SubTypesScanner());
+        reflections.getTypesAnnotatedWith(WsHero.class).forEach(clazz -> heroMap.put(clazz.getAnnotation(WsHero.class).value(), clazz));
     }
 
 
