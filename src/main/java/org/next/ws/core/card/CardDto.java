@@ -11,7 +11,7 @@ public class CardDto {
     private int attack;
     private int vital;
     private String name;
-    private String desc;
+    private String detail;
     private String img;
     private int id;
     private FighterTemplateDto fighter;
@@ -21,7 +21,7 @@ public class CardDto {
         this.id = card.cardIdInGame;
         this.cost = card.cost.getCost();
         this.name = card.name;
-        this.desc = card.desc;
+        this.detail = card.detail;
         this.img = card.img;
         this.fighterCard = card.fighterCard;
         if (card.fighterTemplate == null)

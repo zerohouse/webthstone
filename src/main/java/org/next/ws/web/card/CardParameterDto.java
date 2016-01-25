@@ -14,7 +14,7 @@ import org.next.ws.web.fighter.FighterParameterDto;
 @NoArgsConstructor
 public class CardParameterDto {
     private int cost;
-    private String desc;
+    private String detail;
     private String name;
     private String img;
     private boolean fighterCard;

@@ -2,8 +2,8 @@ package org.next.ws.web.annotation;
 
 import com.mysema.query.jpa.impl.JPAQuery;
 import org.junit.Test;
-import org.next.ws.entity.card.QCardEntity;
 import org.next.ws.util.QueryingUtil;
+import org.next.ws.web.card.QCardEntity;
 
 import java.util.HashMap;
 import java.util.Map;

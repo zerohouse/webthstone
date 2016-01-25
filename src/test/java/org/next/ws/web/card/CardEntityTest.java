@@ -2,7 +2,6 @@ package org.next.ws.web.card;
 
 import com.mysema.query.types.Path;
 import org.junit.Test;
-import org.next.ws.entity.card.QCardEntity;
 
 public class CardEntityTest {
 
@@ -11,7 +10,6 @@ public class CardEntityTest {
         QCardEntity qCardEntity = QCardEntity.cardEntity;
         Path path = (Path) qCardEntity.getClass().getDeclaredField("attack").get(qCardEntity);
         System.out.println(path);
-
     }
 
     @Test

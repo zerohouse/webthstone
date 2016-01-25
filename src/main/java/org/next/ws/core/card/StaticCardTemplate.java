@@ -21,8 +21,7 @@ public class StaticCardTemplate {
             return "동전";
         }
 
-        @Override
-        public String getDesc() {
+        public String getDetail() {
             return "이번 턴에 마나를 1 얻습니다.";
         }
 

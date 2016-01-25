@@ -26,7 +26,7 @@ public class CardEntityDto {
 
     private String name;
 
-    private String desc;
+    private String detail;
 
     private boolean fighterCard;
 
@@ -41,7 +41,7 @@ public class CardEntityDto {
         this.cost = cardEntity.getCost();
         this.img = cardEntity.getImg();
         this.name = cardEntity.getName();
-        this.desc = cardEntity.getDesc();
+        this.detail = cardEntity.getDetail();
         this.fighterCard = cardEntity.isFighterCard();
         if (cardEntity.getFighterTemplate() != null)
             this.fighter = new FighterEntityDto(cardEntity.getFighterTemplate());

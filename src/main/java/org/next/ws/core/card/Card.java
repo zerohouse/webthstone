@@ -21,7 +21,7 @@ public class Card {
     String name;
     Action useAction;
     FighterTemplate fighterTemplate;
-    String desc;
+    String detail;
     String img;
     Integer cardIdInGame;
     boolean fighterCard;
@@ -29,7 +29,7 @@ public class Card {
     public Card(CardTemplate cardTemplate) {
         this.cost = new Cost(cardTemplate.getCost());
         this.name = cardTemplate.getName();
-        this.desc = cardTemplate.getDesc();
+        this.detail = cardTemplate.getDetail();
         this.img = cardTemplate.getImg();
         this.fighterCard = cardTemplate.isFighterCard();
         useAction = ComponentScanner.getAction(cardTemplate.getUseActionTemplate());

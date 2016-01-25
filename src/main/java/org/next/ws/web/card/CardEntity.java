@@ -25,7 +25,7 @@ public class CardEntity implements CardTemplate {
     public CardEntity(CardParameterDto card) {
         cost = card.getCost();
         name = card.getName();
-        desc = card.getDesc();
+        detail = card.getDetail();
         img = card.getImg();
         fighterCard = card.isFighterCard();
         if(fighterCard){
@@ -62,7 +62,7 @@ public class CardEntity implements CardTemplate {
     private String name;
 
     @Column
-    private String desc;
+    private String detail;
 
     @Type(type = "org.hibernate.type.NumericBooleanType")
     @Column

@@ -11,7 +11,7 @@ public interface CardTemplate {
 
     String getName();
 
-    String getDesc();
+    String getDetail();
 
     boolean isFighterCard();
 
